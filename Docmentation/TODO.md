@@ -48,4 +48,4 @@ making 5 min video talk about the project and who has what role due in the 21st 
 - [ ] looking into figma or other tools that use to make highfi prototype provide a justification why we want to use that tool
 - [ ] come up with justification on why we select all the framework for our project and document it.
 ## future TODO list:
-- [ ] refine the problem statement
+- [x] refine the problem statement
