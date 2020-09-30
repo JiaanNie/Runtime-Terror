@@ -1,0 +1,2 @@
+### Project Description:
+In modern society, travelers have a lot of photos that they have taken over the years on their vacations. Having so many fond memories compounding in their photo albums gets overwhelming over time. Where was this photo taken? Why was this structure so important at the time? what can I do to organize my collections? We would like to create an product that is cross platforms allow users feed their images and automatically help them tag them and organize it into different folders  

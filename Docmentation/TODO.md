@@ -19,8 +19,8 @@ making 5 min video talk about the project and who has what role due in the 21st 
 - [x] Start to Upload documents to GitHub
 - [x] adjust the Project video as each video should has it own folder it contain the video and the transcript.
 - [x] upload and update  all the meeting notes up to **sept 28 2020**
-- [ ] has a basic README finish in Github
-- [ ] naming convention for files and folder. set a file for general convention under  Documentation folder.
+- [x] has a basic README finish in Github
+- [x] naming convention for files and folder. set a file for general convention under  Documentation folder.
 - [x] Problem Definition docs
   - [x] Project Vision
   - [x] Project Rationale
