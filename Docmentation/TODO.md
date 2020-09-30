@@ -21,15 +21,19 @@ making 5 min video talk about the project and who has what role due in the 21st 
 - [x] upload and update  all the meeting notes up to **sept 28 2020**
 - [ ] has a basic README finish in Github
 - [ ] naming convention for files and folder. set a file for general convention under  Documentation folder.
-- [ ] Problem Definition
-  - [ ] Project Vision
-  - [ ] Project Rationale
-  - [ ] Stakeholders
-  - [ ] Assumptions
-  - [ ] Constraints
-  - [ ] High-level customer needs/requirements
+- [x] Problem Definition docs
+  - [x] Project Vision
+  - [x] Project Rationale
+  - [x] Stakeholders
+  - [x] Assumptions
+  - [x] Constraints
+  - [x] High-level customer needs/requirements
 - [ ] Empathy mapping
 - [ ] Affinity Diagraming
+- [ ] Continues to improve on the problem definition docs
+- [ ] Try to come up alt name for the product if there is no ideals use Runtime terror
+- [ ] Start designing how the backend and implemented by the end of October
+- [ ] Start a Kanban board at github use that as the todo list for the whole project
 
 
 ### Learning the basic of the tools we going to use for the project
