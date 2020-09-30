@@ -32,7 +32,7 @@ Sunday      |     7PM      | 30 to 120 min  |
 ### TO DO List for future:
 - setting up Github
 
-### Next meeting: 1:30PM Sept 10 2020
+### Next meeting plan: 1:30PM Sept 10 2020
   - prepare some theme for the ML project like health, images, languages, games... etc
   - come up an ideal base on the theme we pick and write it up and submit it.
   - ideal for team name memes allow has to be pg 13    

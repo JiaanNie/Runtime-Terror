@@ -9,10 +9,9 @@
   * Sopuru
 
 ### This meeting:
+  - recorded the video and upload to Github.
 
-#### Vlog recorded and uploaded to github
-##### Decided on Javascript for use in backend
-### Next meeting: 7:00PM Sept 20, 2020:
+### Next meeting plan: 7:00PM Sept 20, 2020:
 -	Start looking into VueJS (frontend)
 -	Start looking into TensorFlow (ML)
 -	Start looking into NodeJS (backend)

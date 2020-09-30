@@ -9,9 +9,10 @@
   * Sopuru
 
 #### Project Idea: Google Landmark Recognition 2020
-- URL: https://www.kaggle.com/c/landmark-recognition-2020
+- [Dataset and Idea](https://www.kaggle.com/c/landmark-recognition-2020)
 
-#### Team Name: Runtime Terror
+#### Team Name:
+  * Runtime Terror
 
 
 ### TO DO List before the next meeting:
@@ -20,6 +21,11 @@
         - meeting notes channel
         - to do list channel
 
-#### potential languages/ frameworks: python, javascript framworks for the website, PHP for backend
+#### potential languages/ frameworks:
+* python
+* javascript frameworks for the website
+* PHP for backend
+* JavaScript for Backend
 
-### Next meeting: 1:30PM Sept 11 2020
+### Next meeting plan: 1:30PM Sept 11 2020:
+* None

@@ -11,12 +11,12 @@
 ### This meeting:
 
 #### Roles & Responsibilities:
-- Machine Learing: Wilson, Allan
-- Frontend:  Sopuru, Ali  Wilson 
+- Machine Learning: Wilson, Allan
+- Frontend:  Sopuru, Ali  Wilson
 - Backend: Sopuru, Ali, Wilson
 - Documentation: everyone
 
 #### Backlog created in group's discord
 
-### Next meeting: 7:00PM Sept 15, 2020:
+### Next meeting plan: 7:00PM Sept 15, 2020:
 - Start and finish Vlog 1

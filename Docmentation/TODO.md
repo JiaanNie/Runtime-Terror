@@ -17,6 +17,19 @@ making 5 min video talk about the project and who has what role due in the 21st 
 - [x] Start organizes GitHub folders and files
 - [x] Set up google drive
 - [x] Start to Upload documents to GitHub
+- [x] adjust the Project video as each video should has it own folder it contain the video and the transcript.
+- [x] upload and update  all the meeting notes up to **sept 28 2020**
+- [ ] has a basic README finish in Github
+- [ ] naming convention for files and folder. set a file for general convention under  Documentation folder.
+- [ ] Problem Definition
+  - [ ] Project Vision
+  - [ ] Project Rationale
+  - [ ] Stakeholders
+  - [ ] Assumptions
+  - [ ] Constraints
+  - [ ] High-level customer needs/requirements
+- [ ] Empathy mapping
+- [ ] Affinity Diagraming
 
 
 ### Learning the basic of the tools we going to use for the project
@@ -27,3 +40,8 @@ making 5 min video talk about the project and who has what role due in the 21st 
 - [x] look into Quasar a Vue base framework for frontend development
 - [x] look into the google image data set see if the data is useable
   - [ ] look for alternative dataset if the google dataset is not useable
+- [ ] set up Quasar (vue base framework) on my local machine
+- [ ] looking into figma or other tools that use to make highfi prototype provide a justification why we want to use that tool
+- [ ] come up with justification on why we select all the framework for our project and document it.
+## future TODO list:
+- [ ] refine the problem statement

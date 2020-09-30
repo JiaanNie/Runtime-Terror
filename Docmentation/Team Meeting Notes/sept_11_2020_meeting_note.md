@@ -8,9 +8,9 @@
   * Allan
   * Sopuru
 
-#### This meeting:
-	Project Proposal completed.
-	Project Proposal submitted to URCourses.
+#### This meeting:  
+	* Project Proposal completed.
+	* Project Proposal submitted to URCourses.
 
-
-### Next meeting: 7:00PM Sept 13, 2020
+### Next meeting plan: 7:00PM Sept 13, 2020
+ * None
