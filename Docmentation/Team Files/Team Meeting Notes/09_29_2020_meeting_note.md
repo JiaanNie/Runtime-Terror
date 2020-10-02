@@ -30,7 +30,7 @@
   Friday      |     10AM     | 30 to 120 min  |  
   Sunday      |     7PM      | 30 to 120 min  |
 
-### Next meeting plan: 7:00PM Oct 3, 2020:
+### Next meeting plan: 10:00AM Oct 2, 2020:
 - Improve on problem definition doc
 - User Stories & design
 
