@@ -15,4 +15,4 @@
 - uploaded both diagram and its raw file
 
 ### Next meeting plan: 10:00AM Oct 6, 2020:
-- Wait for Tim
+- Update team wiki on URCourses
