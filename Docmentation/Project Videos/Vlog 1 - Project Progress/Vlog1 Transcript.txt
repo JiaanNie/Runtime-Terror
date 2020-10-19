@@ -17,9 +17,10 @@ SLIDE 3:
 Project Overview - 
 What problem are we trying to solve?
 	Imagine you took a vaction to New Zealand, where you spent a while wandering around visiting all the exciting places. 
-	One day you visit the sky tower, taking lots of pictures with your nice expensive camera. The next day maybe you visit The Beehive and Parliament House, but you forgot your camera back at the hotel!
-	Not an issue, you can take photos on your phone. Fast forward a month or two; you want to put together a photo album of your exciting vacation, but when you downloaded all your photos from your camera and phone
-	to your computer you realize how much of a pain it is to sort through all the photos you took, you can't even recall the names of some of the places you visited! 
+	One day you visit the sky tower, taking lots of pictures with your nice expensive camera. The next day maybe you visit The Beehive and Parliament House, but you forgot 
+	your camera back at the hotel! Not an issue, you can take photos on your phone. Fast forward a month or two; you want to put together a photo album of your exciting 
+	vacation, but when you downloaded all your photos from your camera and phone to your computer you realize how much of a pain it is to sort through all the photos you 
+	took, you can't even recall the names of some of the places you visited! 
 	
 	What if there was an easy way to have your images automatically sorted and labeld for you?
 	
@@ -29,7 +30,8 @@ What problem are we trying to solve?
 SLIDE 4:
 
 So what is the rationale behind this project? Simply put: manual organization of photos can be a painfully tedious process.
-We envision our solution to be a simple to use, automatic organizer for photos. We intend to use landmarks in the photos to label images, and create a folder structure that is easy to maneuver and find what you're looking for.
+We envision our solution to be a simple to use, automatic organizer for photos. We intend to use landmarks in the photos to label images, and create a folder structure 
+that is easy to maneuver and find what you're looking for.
 
 SLIDE 5:
 
