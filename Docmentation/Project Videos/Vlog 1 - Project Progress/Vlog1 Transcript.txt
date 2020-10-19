@@ -1,0 +1,82 @@
+SLIDE 1: 
+
+Hello, we are Runtime Terror, and this is our first project progress video log.
+
+
+SLIDE 2: 
+
+Our team members:
+Jiaan Wilson nie; responsible for Frontend, Backend, and the Machine Learning model.
+Allan Wambold; responsible for the Machine Learning Model
+Ali Rizvi; Responsible for the Frontend, and Backend development.
+Sopuruchukwu Ugwuonah: Responsible for the Frontend and Backend development.
+
+
+SLIDE 3:
+
+Project Overview - 
+What problem are we trying to solve?
+	Imagine you took a vaction to New Zealand, where you spent a while wandering around visiting all the exciting places. 
+	One day you visit the sky tower, taking lots of pictures with your nice expensive camera. The next day maybe you visit The Beehive and Parliament House, but you forgot your camera back at the hotel!
+	Not an issue, you can take photos on your phone. Fast forward a month or two; you want to put together a photo album of your exciting vacation, but when you downloaded all your photos from your camera and phone
+	to your computer you realize how much of a pain it is to sort through all the photos you took, you can't even recall the names of some of the places you visited! 
+	
+	What if there was an easy way to have your images automatically sorted and labeld for you?
+	
+	We intend to build a web service that will identify landmarks in images, and use this information to sort your photo albums for you.
+
+	
+SLIDE 4:
+
+So what is the rationale behind this project? Simply put: manual organization of photos can be a painfully tedious process.
+We envision our solution to be a simple to use, automatic organizer for photos. We intend to use landmarks in the photos to label images, and create a folder structure that is easy to maneuver and find what you're looking for.
+
+SLIDE 5:
+
+Who are we building this for? We think that this would mostly be useful for people that have a lot of photos from exciting places; someone who travels or vacations lots.
+
+SLIDE 6:
+
+As with every project, there are associated assumptions and risks.
+We assume that our users will have a stable enough internet connection to upload (possibly) large folders to our service
+We assume that the users will trust us with their images
+We assume that the images are of reasonable quality, such that our identification model will be able to accurately decide what landmarks (if any) are in the images.
+
+We take the risk that if the images are of lower quality, it may result in our model mis-labeling the images, creating disorder.
+We take the risk that our training data for our model is inadequate, and our model incorrectly labels images, resulting in disorder for the users photos.
+
+SLIDE 7:
+
+Where are we at in our project?
+	We've initiated our project with a problem description, stakeholders, and solution.
+	We've created some user stories, and done some empathy mapping to guide our project planning.
+	And now, we're moving on to designing and planning our architecture, we know what we want to solve, and now its time to start working on solving it.
+
+SLIDE 8:
+
+As mentioned before, our team has put together some user stories. Feel free to pause the video and read them if you're interested, or read them on our github.
+
+SLIDE 9:
+
+We also empathized with our users in an effort to understand their needs, and built a use case diagram, also posted on our github.
+
+SLIDE 10:
+
+** describe lo-fi here **
+
+SLIDE 11: We've described our first Minimum Viable product:
+
+SLIDE 12:
+
+Team reflection:
+
+Do you feel you on track?
+	We believe we are.
+What progress does the team feel particularly good about?
+	We feel particularly good about converging on the idea of what the real outcome of this project should be.
+Do you feel there are barriers to your success (if any)?
+	We feel like available time is the biggest factor for our success
+Do you need any help going forward?
+	Not at the moment, once work has started on the Landmark Recognition Model we may seek some guidance.
+Any other Questions or concerns?
+	Not at the moment.
