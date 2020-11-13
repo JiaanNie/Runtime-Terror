@@ -45,7 +45,7 @@ SLIDE 7:
 
 Where are we at in our project?
 	We've initiated our project with a problem description, stakeholders, and solution.
-	We've planned using user stories, and empathy mapping.
+	We've planned our project using user stories, and empathy mapping.
 	We've built a functioning frontend and backend skeleton capable of communicating with one another.
 	And now, we're moving on to designing and planning our functionality by implementing the prototypes and
 	beginning work on creating a model that can label images for use in sorting.
