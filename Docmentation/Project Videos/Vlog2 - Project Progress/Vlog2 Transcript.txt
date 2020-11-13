@@ -1,0 +1,66 @@
+SLIDE 1: 
+
+Hello, we are Runtime Terror, and this is our second project progress video log.
+
+
+SLIDE 2: 
+
+Our team members:
+Jiaan Wilson nie; responsible for Frontend, Backend, and the Machine Learning model.
+Allan Wambold; responsible for the Machine Learning Model
+Ali Rizvi; Responsible for the Frontend, and Backend development.
+Sopuruchukwu Ugwuonah; Responsible for the Frontend and Backend development.
+
+
+SLIDE 3:
+
+Project Overview - 
+A quick reminder of what we're trying to accomplish:	
+	
+	What if there was an easy way to have your images automatically sorted and labeld for you?
+	
+	We intend to build a web service that will identify landmarks in images, and use this 
+	information to sort your photo albums for you.
+
+	
+SLIDE 4:
+
+Why are we doing this?
+Simply put: manually organizing photos can be a painfully tedious process.
+We envision our solution to be a simple to use, automatic organizer for photos. We intend to 
+use landmarks in the photos to label images, and create a folder structure 
+that is easy to maneuver and find what you're looking for.
+
+SLIDE 5:
+
+Who are we building this for? We think that this would mostly be useful for people that have a lot 
+of photos from exciting places; someone who travels or vacations a lot.
+
+SLIDE 6:
+
+As with every project, there are associated assumptions and risks.
+These risks and assumptions haven't changed since our last Vlog
+
+SLIDE 7:
+
+Where are we at in our project?
+	We've initiated our project with a problem description, stakeholders, and solution.
+	We've planned using user stories, and empathy mapping.
+	We've built a functioning frontend and backend skeleton capable of communicating with one another.
+	And now, we're moving on to designing and planning our functionality by implementing the prototypes and
+	beginning work on creating a model that can label images for use in sorting.
+
+We'll go into more detail on this later in the presentation.
+	
+SLIDE 8:
+
+demo
+
+SLIDE 9:
+We've designed a new hi-fidelity prototype based on feedback to model a mobile version of our application.
+It has the same core functionality and features of our other prototypes, simply designed for mobile.
+
+Slide 10:
+Results:
+
+
