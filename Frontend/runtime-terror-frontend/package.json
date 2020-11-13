@@ -1,8 +1,8 @@
 {
-  "name": "ense400",
+  "name": "photo-organizer",
   "version": "0.0.1",
-  "description": "A Quasar Framework app",
-  "productName": "Quasar App",
+  "description": "",
+  "productName": "photo organizer",
   "author": "Wilson Nie <wilson.nie13@gmail.com>",
   "private": true,
   "scripts": {

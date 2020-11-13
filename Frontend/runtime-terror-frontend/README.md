@@ -1,6 +1,6 @@
-# Quasar App (ense400)
+# photo organizer (photo-organizer)
 
-A Quasar Framework app
+
 
 ## Install the dependencies
 ```bash
