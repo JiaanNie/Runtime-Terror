@@ -54,13 +54,26 @@ We'll go into more detail on this later in the presentation.
 	
 SLIDE 8:
 
-demo
-
-SLIDE 9:
 We've designed a new hi-fidelity prototype based on feedback to model a mobile version of our application.
 It has the same core functionality and features of our other prototypes, simply designed for mobile.
 
-Slide 10:
-Results:
+
+SLIDE 9:
+
+Technology choices:
+
+
+SLIDE 10:
+
+demo frontend & backend
+
+SLIDE 11:
+
+Results -  a brief overview of everything we've discussed.
+
+SLIDE 12:
+
+reflection:
+*read slide*
 
 
