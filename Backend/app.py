@@ -4,12 +4,12 @@ from flask_cors import CORS
 #from flask_sqlalchemy import SQLAlchemy
 from db.models import *
 from routes.routes import *
+import config
 app = Flask(__name__)
-cors =CORS(app)
+cors =CORS(app, resources={r'/*':{'origins':'*'}})
 api = Api(app)
-#db = SQLAlchemy(app)
-app.config["SQLALCHEMY_DATABASE_URI"] = 'mysql+pymysql://root:1RTTDJ8GmeUSbUtJkQPH@localhost:3306/test'
-
+app.config["SQLALCHEMY_DATABASE_URI"] = config.DatabaseURI()
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db.init_app(app)
 with app.app_context():
     db.create_all()

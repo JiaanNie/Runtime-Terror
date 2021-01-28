@@ -1,1 +1,4 @@
 environment.yml
+config.py
+UploadImages/
+*.pyc

@@ -3,8 +3,10 @@ from flask import request, Response, send_file
 from db.models import *
 from datetime import datetime
 import os
+import config
 from werkzeug.utils import secure_filename
-UPLOAD_FOLDER = 'D:\\University\\ENSE400\\Runtime-Terror\\Backend\\UploadImages'
+#UPLOAD_FOLDER = 'D:\\University\\ENSE400\\Runtime-Terror\\Backend\\UploadImages'
+UPLOAD_FOLDER = config.ImageStoragePath()
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 class Image(Resource):
     def post(self):
