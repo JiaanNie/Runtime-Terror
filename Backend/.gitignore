@@ -2,3 +2,5 @@ environment.yml
 config.py
 UploadImages/*
 *.pyc
+*.zip
+SotedImages/*

@@ -14,5 +14,6 @@ db.init_app(app)
 with app.app_context():
     db.create_all()
 api.add_resource(Image, "/image", "/image/<image_id>")
+api.add_resource(SorteImage, "/sort")
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug="True")

@@ -17,8 +17,13 @@ export default {
     test () {
       const localUrl = 'http://localhost:5000/'
       // let aws_url  = 'http://ec2-3-97-34-208.ca-central-1.compute.amazonaws.com:5000/'
-      axios.get(localUrl + 'image/3').then(function (res) {
-        document.getElementById('ItemPreview').src = localUrl + 'image/3'
+      axios.get(localUrl + 'sort').then(function (res) {
+        var fileURL = window.URL.createObjectURL(new Blob([res.data]))
+        var fileLink = document.createElement('a')
+        fileLink.href = fileURL
+        fileLink.setAttribute('download', 'result.zip')
+        document.body.appendChild(fileLink)
+        fileLink.click()
       })
     }
   }
