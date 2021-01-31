@@ -57,8 +57,8 @@ class SorteImage(Resource):
             for file in sorted_imgs[label]:
                 try:
                     ## use the copy function for testing after everything is working use the move function
-                    #shutil.copy(file.image_path, target_path)
-                    print("moving file over")
+                    shutil.copy(file.image_path, target_path)
+                    #print("moving file over")
                 except:
                     print(file.image_path, file.id, "image no longer exist")
         file_paths = []
@@ -67,7 +67,8 @@ class SorteImage(Resource):
                 path =  os.path.join(root, file)
                 print(path)
                 file_paths.append(path)
-        with ZipFile(base_path+'\\result.zip','w') as zip:
+
+        with ZipFile('result.zip','w') as zip:
             for file in file_paths:
                 zip.write(file)
-        return send_file(base_path+'\\result.zip', attachment_filename='capsule.zip', as_attachment=True)
+        return send_file('result.zip', attachment_filename='capsule.zip', as_attachment=True)
