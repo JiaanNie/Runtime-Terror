@@ -1,6 +1,5 @@
 <template>
-  <q-page class="bg-blue-grey-2" padding>
-  
+  <q-page class="bg-grey-2" padding>
   </q-page>
 </template>
 

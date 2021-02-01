@@ -2,15 +2,15 @@
 const routes = [
   {
     path: '/',
-    component: () => import('layouts/MainLayout.vue'),
+    component: () => import('layouts/IndexLayout.vue'),
     children: [
       { path: '', component: () => import('pages/Index.vue') }
     ]
   },
-  
+
   {
     path: '/Discover',
-    component: () => import('layouts/DiscoverLayout.vue'),
+    component: () => import('layouts/IndexLayout.vue'),
     children: [
       { path: '', component: () => import('pages/Discover.vue') }
     ]
@@ -18,7 +18,7 @@ const routes = [
 
   {
     path: '/Favourites',
-    component: () => import('layouts/FavouritesLayout.vue'),
+    component: () => import('layouts/IndexLayout.vue'),
     children: [
       { path: '', component: () => import('pages/Favourites.vue') }
     ]
@@ -26,7 +26,7 @@ const routes = [
 
   {
     path: '/Settings',
-    component: () => import('layouts/SettingsLayout.vue'),
+    component: () => import('layouts/IndexLayout.vue'),
     children: [
       { path: '', component: () => import('pages/Settings.vue') }
     ]
