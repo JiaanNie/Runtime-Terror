@@ -14,6 +14,7 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 class Image(Resource):
     def post(self):
         uploaded_image = request.files['img']
+        print(uploaded_image)
         label = request.form["label"]
         if uploaded_image == None:
             return "No image uploaded", 400
