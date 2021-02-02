@@ -3,4 +3,4 @@ config.py
 UploadImages/*
 *.pyc
 *.zip
-SotedImages/*
+SortedImages/*
