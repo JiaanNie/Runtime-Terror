@@ -9,7 +9,7 @@
 </template>
 
 <script>
-// import axios from 'axios'
+import axios from 'axios'
 // // import JSZip from 'jszip'
 // import { saveAs } from 'file-saver'
 const AWS_URL = 'http://ec2-3-97-34-208.ca-central-1.compute.amazonaws.com:5000/'
@@ -23,20 +23,25 @@ export default {
   },
   methods: {
     uploadImages (filesImages) {
-      var fr = new FileReader()
-
-      console.log(fr)
+      // var fr = new FileReader()
+      var fd = new FormData()
       for (var i = 0; i < filesImages.length; i++) {
-        console.log(filesImages[i])
-        fr.readAsArrayBuffer(filesImages[i])
-        console.log(fr)
-        console.log(AWS_URL)
+        fd.append('img', filesImages[i])
+        fd.append('label', 'test')
       }
-      fr.onloadend = function () {
-        console.log(fr.result)
-        var bytes = new Uint8Array(fr.result)
-        console.log(bytes)
-      }
+      console.log(fd.getHeaders)
+      axios.post(AWS_URL + 'image', fd).then(res => { console.log(res) })
+      // axios({ method: 'post', url: AWS_URL + 'image', data: fd, headers: { 'Content-Type': 'multipart/form-data' } }).then(function (response) {
+      //   // handle success
+      //   console.log(response)
+      // })
+      //   .catch(function (response) {
+      //   // handle error
+      //     for (var pair of fd.entries()) {
+      //       console.log(pair[0] + ', ' + pair[1])
+      //     }
+      //     console.log(response)
+      //   })
     }
   }
 }
