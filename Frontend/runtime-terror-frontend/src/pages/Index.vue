@@ -12,7 +12,7 @@
     <q-dialog v-model="ready">
       <q-card style="max-width: 1500px;width:1400px;height:160px">
         <q-card-section>
-          <div class="text-h6">fuck u</div>
+          <div class="text-h6">Sorting Images</div>
         </q-card-section>
 
         <q-card-section class="q-pt-none">
@@ -77,3 +77,10 @@ export default {
   }
 }
 </script>
+
+<style >
+.q-field__control-container div {
+  color: transparent;
+}
+
+</style>
