@@ -1,9 +1,10 @@
 <template>
   <q-page class="bg-grey-2" padding>
-    <div class="q-gutter-lg row items-start">
-        <q-file standout bottom-slots color="grey" style="max-width: 150px" bg-color="grey-4" v-model="filesImages" multiple accept=".jpg, image/*" @input="uploadImages(filesImages)" >
-            <q-icon name="add" class="absolute-center" style="font-size: 2em; color: #BCAAA4"/>
+    <div class="q-gutter-lg row items-start justify-evenly">
+        <q-file standout bottom-slots color="grey" style="height: 140px; max-width: 150px" bg-color="grey-4" v-model="filesImages" multiple accept=".jpg, image/*" @input="uploadImages(filesImages)" >
+            <q-icon name="add_a_photo" class="absolute-center" style="height: 140px; font-size: 2em; color: #BCAAA4"/>
         </q-file>
+        <q-img v-for= "item in urls" :key=item :src=item style="height: 140px; max-width: 150px"/>
     </div>
   </q-page>
 </template>
@@ -18,39 +19,25 @@ export default {
   data () {
     return {
       tab: 'albums',
-      filesImages: null
+      filesImages: null,
+      urls: ['https://placeimg.com/500/300/nature', 'https://placeimg.com/500/300/nature', 'https://placeimg.com/500/300/nature']
     }
   },
   methods: {
     uploadImages (filesImages) {
-      // var fr = new FileReader()
       var fd = new FormData()
       for (var i = 0; i < filesImages.length; i++) {
         fd.append('img', filesImages[i])
         fd.append('label', 'test')
       }
-      console.log(fd.getHeaders)
       axios.post(AWS_URL + 'image', fd).then(res => { console.log(res) })
-      // axios({ method: 'post', url: AWS_URL + 'image', data: fd, headers: { 'Content-Type': 'multipart/form-data' } }).then(function (response) {
-      //   // handle success
-      //   console.log(response)
-      // })
-      //   .catch(function (response) {
-      //   // handle error
-      //     for (var pair of fd.entries()) {
-      //       console.log(pair[0] + ', ' + pair[1])
-      //     }
-      //     console.log(response)
-      //   })
     }
   }
 }
 </script>
 
-<style lang="sass" scoped>
-.row > div
-  padding: 10px 15px
-  background: white
-.row + .row
-  margin-top: 1rem
+<style lang="scss" scoped>
+div[class="relative-position"] {
+  height: 140px !important;
+}
 </style>
