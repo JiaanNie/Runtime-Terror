@@ -1,5 +1,5 @@
 from flask_restful import Api, Resource
-from flask import request, Response, send_file
+from flask import request, Response, send_file, jsonify
 from db.models import *
 from datetime import datetime
 import os
@@ -8,6 +8,7 @@ from werkzeug.utils import secure_filename
 from collections import defaultdict
 import shutil
 from zipfile import ZipFile
+import base64
 #UPLOAD_FOLDER = 'D:\\University\\ENSE400\\Runtime-Terror\\Backend\\UploadImages'
 UPLOAD_FOLDER = config.ImageStoragePath()
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
@@ -37,9 +38,22 @@ class Image(Resource):
         db.session.add(new_image)
         db.session.commit()
 
+    def get(self):
+        list_of_ids = []
+        imgs  = ImageEntry.query.all()
+        for img in imgs:
+            list_of_ids.append(img.id)
+        print(list_of_ids)
+        return jsonify(list_of_ids)
+
+class FetchImageByID(Resource):
     def get(self, image_id):
-        img  = ImageEntry.query.filter_by(id=image_id).first()
-        return send_file(img.image_path, mimetype=img.mime_type)
+        img = ImageEntry.query.filter_by(id=image_id).first()
+        print(img.image_path)
+        data = open(img.image_path, "rb").read()
+        bytes = bytearray(data)
+        return Response(bytes, mimetype=img.mime_type)
+
 
 class SorteImage(Resource):
     def get(self):
@@ -68,8 +82,7 @@ class SorteImage(Resource):
                 path =  os.path.join(root, file)
                 print(path)
                 file_paths.append(path)
-
         with ZipFile('result.zip','w') as zip:
             for file in file_paths:
                 zip.write(file)
-        return send_file('result.zip', attachment_filename='capsule.zip', as_attachment=True)
+        return send_file('result.zip', attachment_filename='capsule.zip', as_attachment=True, cache_timeout=0)

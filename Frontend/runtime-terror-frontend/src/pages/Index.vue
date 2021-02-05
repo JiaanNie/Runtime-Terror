@@ -21,7 +21,7 @@
         </q-card-section>
 
         <q-card-actions align="right">
-          <q-btn flat label="Donwload Zip" color="primary" v-close-popup @click="getZip"/>
+          <q-btn flat label="Donwload Zip" color="primary" @click="getZip"/>
         </q-card-actions>
       </q-card>
     </q-dialog>
@@ -46,7 +46,18 @@ export default {
       progress: 0,
       isQuery: false,
       isDone: 1
+
     }
+  },
+  created: function () {
+    var vm = this
+    axios.get(URL + 'image').then(function (res) {
+      console.log(res.data)
+      for (var i in res.data) {
+        var targetURL = URL + 'image/' + res.data[i]
+        vm.urls.push(targetURL)
+      }
+    })
   },
   methods: {
     uploadImages (filesImages) {
@@ -67,10 +78,11 @@ export default {
     sortImages () {
       var vm = this
       this.ready = true
-      setTimeout(() => { vm.isQuery = true }, 2000)
+      setTimeout(() => { vm.isQuery = true }, 8000)
     },
     getZip () {
       axios.get(URL + 'sort', { responseType: 'blob' }).then(function (res) {
+        console.log(res.data)
         saveAs(res.data)
       })
     }
