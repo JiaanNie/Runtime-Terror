@@ -54,6 +54,14 @@ class FetchImageByID(Resource):
         bytes = bytearray(data)
         return Response(bytes, mimetype=img.mime_type)
 
+class FetchLabel(Resource):
+    def get(self):
+        result = []
+        labels = ImageEntry.query.with_entities(ImageEntry.label).distinct().all()
+        for lable in labels:
+            result.append(lable[0])
+        return result
+
 
 class SorteImage(Resource):
     def get(self):

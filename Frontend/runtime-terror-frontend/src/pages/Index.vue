@@ -1,5 +1,6 @@
 <template>
   <q-page class="bg-grey-2" padding>
+    <q-search/>
     <div class="q-gutter-lg row items-start justify-evenly">
         <q-file standout bottom-slots ref="file" color="grey" style="color: grey-4; height: 140px; max-width: 150px; color:transparent; " bg-color="grey-4" v-model="filesImages" multiple accept=".jpg, image/*" @input="uploadImages(filesImages)" >
             <q-icon name="add_a_photo" class="absolute-center" style="height: 140px; font-size: 2em; color: #BCAAA4"/>
@@ -14,23 +15,22 @@
         <q-card-section>
           <div class="text-h6">Sorting Images</div>
         </q-card-section>
-
         <q-card-section class="q-pt-none">
           <q-linear-progress query class="q-mt-md" v-if="!isQuery" />
           <q-linear-progress class="q-mt-md" :value="isDone" v-if="isQuery"/>
         </q-card-section>
 
         <q-card-actions align="right">
-          <q-btn flat label="Donwload Zip" color="primary" @click="getZip"/>
+          <q-btn flat label="Donwload Zip" color="primary" v-close-popup @click="getZip"/>
         </q-card-actions>
       </q-card>
     </q-dialog>
+    <q-search/>
   </q-page>
 </template>
 
 <script>
 import axios from 'axios'
-// // import JSZip from 'jszip'
 import { saveAs } from 'file-saver'
 // const URL = 'http://ec2-3-97-34-208.ca-central-1.compute.amazonaws.com:5000/'
 const URL = 'http://localhost:5000/'
@@ -51,6 +51,7 @@ export default {
   },
   created: function () {
     var vm = this
+
     axios.get(URL + 'image').then(function (res) {
       console.log(res.data)
       for (var i in res.data) {
@@ -94,5 +95,4 @@ export default {
 .q-field__control-container div {
   color: transparent;
 }
-
 </style>
