@@ -8,34 +8,34 @@
       <q-btn v-if="!isReady" dense flat>
          <i class="fa fa-search" aria-hidden="true" style="font-size: 20px;" @click="isReady = true"></i>
       </q-btn>
-      <q-input v-if="isReady" dark dense standout v-model="text" input-class="text-right" class="q-ml-md">
+      <q-input v-if="isReady" dark dense standout v-model="text" input-class="text-right" class="q-ml-md" style="max-width: 190px">
         <template v-slot:append>
-          <q-icon v-if="text === ''" name="search" @click="isReady = false"/>
-          <q-icon v-else name="clear" class="cursor-pointer" @click="text = ''; isReady = false" />
+          <q-icon v-if="text === ''" name="search"/>
+          <q-icon v-else name="clear" class="cursor-pointer" @click="isReady=false; text = ''" />
         </template>
       </q-input>
       <!-- <q-btn dense flat>
          <i class="fa fa-filter" aria-hidden="true" style="font-size: 20px;" ></i>
       </q-btn> -->
-      <q-btn-dropdown color="primary">
-      <q-list>
-        <q-item clickable v-close-popup @click="onItemClick">
-          <q-item-section>
-            <q-item-label>Photos</q-item-label>
-          </q-item-section>
-        </q-item>
+      <q-btn-dropdown dense flat dropdown-icon="filter_alt">
+        <q-list>
+          <q-item clickable v-close-popup @click="onItemClick">
+            <q-item-section>
+              <q-item-label>Photos</q-item-label>
+            </q-item-section>
+          </q-item>
 
-        <q-item clickable v-close-popup @click="onItemClick">
-          <q-item-section>
-            <q-item-label>Videos</q-item-label>
-          </q-item-section>
-        </q-item>
+          <q-item clickable v-close-popup @click="onItemClick">
+            <q-item-section>
+              <q-item-label>Videos</q-item-label>
+            </q-item-section>
+          </q-item>
 
-        <q-item clickable v-close-popup @click="onItemClick">
-          <q-item-section>
-            <q-item-label>Articles</q-item-label>
-          </q-item-section>
-        </q-item>
+          <q-item clickable v-close-popup @click="onItemClick">
+            <q-item-section>
+              <q-item-label>Articles</q-item-label>
+            </q-item-section>
+          </q-item>
       </q-list>
     </q-btn-dropdown>
       <q-btn dense flat>
@@ -53,7 +53,9 @@ export default {
     return {
       isReady: false,
       labels: [],
-      showLabels: false
+      showLabels: false,
+      text: '',
+      dropdown: false
     }
   },
   created: function () {

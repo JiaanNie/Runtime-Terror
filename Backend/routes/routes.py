@@ -94,3 +94,11 @@ class SorteImage(Resource):
             for file in file_paths:
                 zip.write(file)
         return send_file('result.zip', attachment_filename='capsule.zip', as_attachment=True, cache_timeout=0)
+
+class Search(Resource):
+    def post(self):
+        print("/search function")
+
+class Filter(Resource):
+    def get(self, label):
+        print("filter by" + label)
