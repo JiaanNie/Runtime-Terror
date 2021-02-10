@@ -71,15 +71,16 @@ export default {
           vm.urls.push(e.target.result)
         }
         fd.append('img', filesImages[i])
-        fd.append('label', 'test')
+        fd.append('label', 'abc')
         axios.post(URL + 'image', fd).then(res => { console.log(res) })
       }
       vm.isDoneUploading = true
+      console.log(vm.urls)
     },
     sortImages () {
       var vm = this
       this.ready = true
-      setTimeout(() => { vm.isQuery = true }, 8000)
+      setTimeout(() => { vm.isQuery = true }, 2000)
     },
     getZip () {
       axios.get(URL + 'sort', { responseType: 'blob' }).then(function (res) {

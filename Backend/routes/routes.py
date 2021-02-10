@@ -43,7 +43,6 @@ class Image(Resource):
         imgs  = ImageEntry.query.all()
         for img in imgs:
             list_of_ids.append(img.id)
-        print(list_of_ids)
         return jsonify(list_of_ids)
 
 class FetchImageByID(Resource):
@@ -99,6 +98,12 @@ class Search(Resource):
     def post(self):
         print("/search function")
 
-class Filter(Resource):
-    def get(self, label):
-        print("filter by" + label)
+class FilterLabel(Resource):
+    def get(self):
+        filterd_ids = []
+        param = request.args.to_dict()
+        label = param["filter_by"]
+        imgs = ImageEntry.query.filter_by(label=label).all()
+        for img in imgs:
+            filterd_ids.append(img.id)
+        return jsonify(filterd_ids)

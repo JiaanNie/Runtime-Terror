@@ -19,21 +19,9 @@
       </q-btn> -->
       <q-btn-dropdown dense flat dropdown-icon="filter_alt">
         <q-list>
-          <q-item clickable v-close-popup @click="onItemClick">
+          <q-item v-for= "label in labels" :key=label clickable v-close-popup @click="onItemClick(label)">
             <q-item-section>
-              <q-item-label>Photos</q-item-label>
-            </q-item-section>
-          </q-item>
-
-          <q-item clickable v-close-popup @click="onItemClick">
-            <q-item-section>
-              <q-item-label>Videos</q-item-label>
-            </q-item-section>
-          </q-item>
-
-          <q-item clickable v-close-popup @click="onItemClick">
-            <q-item-section>
-              <q-item-label>Articles</q-item-label>
+              <q-item-label>{{label}}</q-item-label>
             </q-item-section>
           </q-item>
       </q-list>
@@ -65,6 +53,14 @@ export default {
         vm.labels.push(res.data[index])
       }
     })
+    console.log(this.labels)
+  },
+  methods: {
+    onItemClick (label) {
+      axios.get(URL + 'filter', { params: { filter_by: label } }).then((res) => {
+        console.log(res)
+      })
+    }
   }
 }
 </script>
