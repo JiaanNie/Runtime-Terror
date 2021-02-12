@@ -19,7 +19,7 @@
       </q-btn> -->
       <q-btn-dropdown dense flat dropdown-icon="filter_alt">
         <q-list>
-          <q-item v-for= "label in labels" :key=label clickable v-close-popup @click="onItemClick(label)">
+          <q-item v-for= "label in labels" :key=label clickable v-close-popup @click="filterImagesByLabel(label)">
             <q-item-section>
               <q-item-label>{{label}}</q-item-label>
             </q-item-section>
@@ -34,6 +34,7 @@
 </template>
 <script>
 import axios from 'axios'
+import { mapGetters, mapActions } from 'vuex'
 // const URL = 'http://ec2-3-97-34-208.ca-central-1.compute.amazonaws.com:5000/'
 const URL = 'http://localhost:5000/'
 export default {
@@ -56,11 +57,10 @@ export default {
     console.log(this.labels)
   },
   methods: {
-    onItemClick (label) {
-      axios.get(URL + 'filter', { params: { filter_by: label } }).then((res) => {
-        console.log(res)
-      })
-    }
+    ...mapActions({ filterImagesByLabel: 'imageURLs/filterImagesByLabel' })
+  },
+  computed: {
+    ...mapGetters({ getImagesURL: 'imageURLs/getImagesURL' })
   }
 }
 </script>

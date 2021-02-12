@@ -49,8 +49,8 @@ export default {
     }
   },
   created: function () {
+    // loading images from the db into the app fetch all the url for display each image on the app
     this.setImagesURL()
-    // this.urls = this.getImagesURL
   },
   methods: {
     uploadImages (filesImages) {
