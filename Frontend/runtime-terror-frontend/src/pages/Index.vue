@@ -1,11 +1,10 @@
 <template>
   <q-page class="bg-grey-2" padding>
-    <q-search/>
     <div class="q-gutter-lg row items-start justify-evenly">
         <q-file standout bottom-slots ref="file" color="grey" style="color: grey-4; height: 140px; max-width: 150px; color:transparent; " bg-color="grey-4" v-model="filesImages" multiple accept=".jpg, image/*" @input="uploadImages(filesImages)" >
             <q-icon name="add_a_photo" class="absolute-center" style="height: 140px; font-size: 2em; color: #BCAAA4"/>
         </q-file>
-        <q-img v-for= "item in urls" :key=item :src=item style="height: 140px; max-width: 150px" class="shadow-7"/>
+        <q-img v-for= "item in getImagesURL" :key=item :src=item style="height: 140px; max-width: 150px" class="shadow-7"/>
     </div>
     <q-page-sticky position="bottom-right" :offset="[18, 18]">
         <q-btn v-if="isDoneUploading" fab icon="done" color="accent" class="shadow-7" @click= "sortImages" />
@@ -25,13 +24,13 @@
         </q-card-actions>
       </q-card>
     </q-dialog>
-    <q-search/>
   </q-page>
 </template>
 
 <script>
 import axios from 'axios'
 import { saveAs } from 'file-saver'
+import { mapGetters, mapActions } from 'vuex'
 // const URL = 'http://ec2-3-97-34-208.ca-central-1.compute.amazonaws.com:5000/'
 const URL = 'http://localhost:5000/'
 export default {
@@ -50,15 +49,8 @@ export default {
     }
   },
   created: function () {
-    var vm = this
-
-    axios.get(URL + 'image').then(function (res) {
-      console.log(res.data)
-      for (var i in res.data) {
-        var targetURL = URL + 'image/' + res.data[i]
-        vm.urls.push(targetURL)
-      }
-    })
+    this.setImagesURL()
+    // this.urls = this.getImagesURL
   },
   methods: {
     uploadImages (filesImages) {
@@ -72,10 +64,12 @@ export default {
         }
         fd.append('img', filesImages[i])
         fd.append('label', 'abc')
-        axios.post(URL + 'image', fd).then(res => { console.log(res) })
+        axios.post(URL + 'image', fd).then(function (res) {
+          console.log(res)
+          vm.setImagesURL()
+        })
       }
       vm.isDoneUploading = true
-      console.log(vm.urls)
     },
     sortImages () {
       var vm = this
@@ -87,7 +81,11 @@ export default {
         console.log(res.data)
         saveAs(res.data)
       })
-    }
+    },
+    ...mapActions({ setImagesURL: 'imageURLs/setImagesURL' })
+  },
+  computed: {
+    ...mapGetters({ getImagesURL: 'imageURLs/getImagesURL' })
   }
 }
 </script>
