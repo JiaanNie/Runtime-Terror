@@ -96,8 +96,19 @@ class SorteImage(Resource):
 
 class Search(Resource):
     def post(self):
-        print(request.json['text'])
-        print("/search function")
+        ids = []
+        text = request.json['text']
+        # searchable_columns = ['file_name', 'mime_type', 'label']
+        # for column in searchable_columns:
+        #     result = ImageEntry.query.filter_by(getattr(ImageEntry, column).ilike("%"+text+"")).all()
+        #     if result != []:
+        #         query = query + result
+        result = ImageEntry.query.filter(ImageEntry.file_name.like("%"+ text + "%")).all()
+        result += ImageEntry.query.filter(ImageEntry.mime_type.like("%"+ text + "%")).all()
+        result += ImageEntry.query.filter(ImageEntry.label.like("%"+ text + "%")).all()
+        for img in result:
+            ids.append(img.id)
+        return jsonify(ids)
 
 class FilterLabel(Resource):
     def get(self):

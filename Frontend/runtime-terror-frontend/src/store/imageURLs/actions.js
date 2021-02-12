@@ -29,5 +29,12 @@ export function filterImagesByLabel (state, label) {
 
 export function searchImages (state, inputText) {
   console.log(inputText)
-  axios.post(URL + 'search', { text: inputText }).then((res) => { console.log(res) })
+  var urls = []
+  axios.post(URL + 'search', { text: inputText }).then((res) => {
+    for (var i in res.data) {
+      var targetURL = URL + 'image/' + res.data[i]
+      urls.push(targetURL)
+    }
+    state.commit('updateIDsArray', urls)
+  })
 }
