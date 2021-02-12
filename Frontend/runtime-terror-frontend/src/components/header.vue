@@ -23,7 +23,7 @@
           </q-item>
       </q-list>
     </q-btn-dropdown>
-      <q-btn dense flat>
+      <q-btn dense flat to="/Settings">
         <i class="fas fa-cog" aria-hidden="true" style="font-size: 20px;"></i>
       </q-btn>
     </q-toolbar>

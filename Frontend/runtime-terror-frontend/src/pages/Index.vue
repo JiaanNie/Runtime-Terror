@@ -1,7 +1,7 @@
 <template>
-  <q-page class="bg-grey-2" padding>
+  <q-page padding>
     <div class="q-gutter-lg row items-start justify-evenly">
-        <q-file standout bottom-slots ref="file" color="grey" style="color: grey-4; height: 140px; max-width: 150px; color:transparent; " bg-color="grey-4" v-model="filesImages" multiple accept=".jpg, image/*" @input="uploadImages(filesImages)" >
+        <q-file standout bottom-slots ref="file" color="grey" style="color: grey-4; height: 140px; max-width: 150px; color:transparent; " v-model="filesImages" multiple accept=".jpg, image/*" @input="uploadImages(filesImages)" >
             <q-icon name="add_a_photo" class="absolute-center" style="height: 140px; font-size: 2em; color: #BCAAA4"/>
         </q-file>
         <q-img v-for= "item in getImagesURL" :key=item :src=item style="height: 140px; max-width: 150px" class="shadow-7"/>
@@ -51,6 +51,9 @@ export default {
   created: function () {
     // loading images from the db into the app fetch all the url for display each image on the app
     this.fetchAllImagesURL()
+    console.log(this.$q.dark.mode)
+    // this.$q.dark.toggle()
+    console.log(this.$q.dark.mode)
   },
   methods: {
     uploadImages (filesImages) {
@@ -78,7 +81,6 @@ export default {
     },
     getZip () {
       axios.get(URL + 'sort', { responseType: 'blob' }).then(function (res) {
-        console.log(res.data)
         saveAs(res.data)
       })
     },

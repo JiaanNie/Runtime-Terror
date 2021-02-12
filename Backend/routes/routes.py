@@ -20,6 +20,7 @@ class Image(Resource):
         if uploaded_image == None:
             return "No image uploaded", 400
 
+        print(dir(uploaded_image))
         ## save the image to the folder
         file_name = secure_filename(uploaded_image.filename)
         time_uploaded = datetime.now().strftime("%Y%m%d%H%M%S")
