@@ -50,7 +50,7 @@ export default {
   },
   created: function () {
     // loading images from the db into the app fetch all the url for display each image on the app
-    this.setImagesURL()
+    this.fetchAllImagesURL()
   },
   methods: {
     uploadImages (filesImages) {
@@ -66,7 +66,7 @@ export default {
         fd.append('label', 'abc')
         axios.post(URL + 'image', fd).then(function (res) {
           console.log(res)
-          vm.setImagesURL()
+          vm.fetchAllImagesURL()
         })
       }
       vm.isDoneUploading = true
@@ -82,7 +82,7 @@ export default {
         saveAs(res.data)
       })
     },
-    ...mapActions({ setImagesURL: 'imageURLs/setImagesURL' })
+    ...mapActions({ fetchAllImagesURL: 'imageURLs/fetchAllImagesURL' })
   },
   computed: {
     ...mapGetters({ getImagesURL: 'imageURLs/getImagesURL' })

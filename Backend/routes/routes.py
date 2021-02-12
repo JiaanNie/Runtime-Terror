@@ -96,6 +96,7 @@ class SorteImage(Resource):
 
 class Search(Resource):
     def post(self):
+        print(request.json['text'])
         print("/search function")
 
 class FilterLabel(Resource):
