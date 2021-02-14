@@ -13,7 +13,11 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db.init_app(app)
 with app.app_context():
     db.create_all()
-api.add_resource(Image, "/image", "/image/<image_id>")
+api.add_resource(Image, "/image")
+api.add_resource(FetchImageByID, "/image/<image_id>")
 api.add_resource(SorteImage, "/sort")
+api.add_resource(FetchLabel, "/labels")
+api.add_resource(Search, "/search")
+api.add_resource(FilterLabel, "/filter")
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug="True")

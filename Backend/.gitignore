@@ -4,3 +4,4 @@ UploadImages/*
 *.pyc
 *.zip
 SortedImages/*
+__pycache__/
