@@ -96,4 +96,7 @@ export default {
 .q-field__control-container div {
   color: transparent;
 }
+body.body--dark {
+  background: #FFFF00
+}
 </style>
