@@ -20,6 +20,7 @@ class Image(Resource):
         if uploaded_image == None:
             return "No image uploaded", 400
 
+        print(dir(uploaded_image))
         ## save the image to the folder
         file_name = secure_filename(uploaded_image.filename)
         time_uploaded = datetime.now().strftime("%Y%m%d%H%M%S")
@@ -96,7 +97,19 @@ class SorteImage(Resource):
 
 class Search(Resource):
     def post(self):
-        print("/search function")
+        ids = []
+        text = request.json['text']
+        # searchable_columns = ['file_name', 'mime_type', 'label']
+        # for column in searchable_columns:
+        #     result = ImageEntry.query.filter_by(getattr(ImageEntry, column).ilike("%"+text+"")).all()
+        #     if result != []:
+        #         query = query + result
+        result = ImageEntry.query.filter(ImageEntry.file_name.like("%"+ text + "%")).all()
+        result += ImageEntry.query.filter(ImageEntry.mime_type.like("%"+ text + "%")).all()
+        result += ImageEntry.query.filter(ImageEntry.label.like("%"+ text + "%")).all()
+        for img in result:
+            ids.append(img.id)
+        return jsonify(ids)
 
 class FilterLabel(Resource):
     def get(self):
