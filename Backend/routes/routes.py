@@ -34,7 +34,8 @@ class Image(Resource):
             label = label,
             mime_type = mime_type,
             file_name = new_file_name,
-            image_path = path
+            image_path = path,
+            favorite = False
         )
         db.session.add(new_image)
         db.session.commit()

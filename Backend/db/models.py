@@ -7,3 +7,4 @@ class ImageEntry(db.Model):
     mime_type = db.Column(db.Text, nullable=False)
     file_name = db.Column(db.Text, nullable=False)
     image_path = db.Column(db.Text, nullable=False)
+    favorite = db.Column(db.Boolean)

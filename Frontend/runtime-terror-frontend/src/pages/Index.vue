@@ -4,7 +4,10 @@
         <q-file standout bottom-slots ref="file" color="grey" style="color: grey-4; height: 140px; max-width: 150px; color:transparent; " v-model="filesImages" multiple accept=".jpg, image/*" @input="uploadImages(filesImages)" >
             <q-icon name="add_a_photo" class="absolute-center" style="height: 140px; font-size: 2em; color: #BCAAA4"/>
         </q-file>
-        <q-img v-for= "item in getImagesURL" :key=item :src=item style="height: 140px; max-width: 150px" class="shadow-7"/>
+        <q-img v-for= "item in getImagesURL" :key=item :src=item style="height: 140px; max-width: 150px" class="shadow-7">
+            <q-icon v-if="!favorite" name="favorite_border" clickable @click="setFavorite" class="absolute-bottom-right" style="font-size: 1.5em;"/>
+            <q-icon v-if="favorite" name="favorite" clickable @click="setFavorite" class="absolute-bottom-right" style="font-size: 1.5em; color: red"/>
+        </q-img>
     </div>
     <q-page-sticky position="bottom-right" :offset="[18, 18]">
         <q-btn v-if="isDoneUploading" fab icon="done" color="accent" class="shadow-7" @click= "sortImages" />
@@ -44,7 +47,8 @@ export default {
       ready: false,
       progress: 0,
       isQuery: false,
-      isDone: 1
+      isDone: 1,
+      favorite: false
 
     }
   },
@@ -84,10 +88,18 @@ export default {
         saveAs(res.data)
       })
     },
-    ...mapActions({ fetchAllImagesURL: 'imageURLs/fetchAllImagesURL' })
+    ...mapActions({ fetchAllImagesURL: 'imageURLs/fetchAllImagesURL' }),
+    setFavorite () {
+      this.favorite = !this.favorite
+      console.log(this.favorite)
+    }
   },
   computed: {
-    ...mapGetters({ getImagesURL: 'imageURLs/getImagesURL' })
+    ...mapGetters({ getImagesURL: 'imageURLs/getImagesURL' }),
+    toggleFavorite () {
+      console.log(this.favorite)
+      return this.favorite
+    }
   }
 }
 </script>
