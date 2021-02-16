@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import { colors } from 'quasar'
 export default {
   name: 'Settings',
   data () {
@@ -35,6 +36,11 @@ export default {
   methods: {
     toggle () {
       this.$q.dark.toggle()
+      if (this.$q.dark.isActive === true) {
+        colors.setBrand('primary', '#332940')
+      } else {
+        colors.setBrand('primary', '#1976D2')
+      }
     }
   }
 }
