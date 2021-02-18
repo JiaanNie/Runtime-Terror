@@ -86,7 +86,6 @@ export default {
     ...mapActions({ fetchAllImagesURL: 'imageURLs/fetchAllImagesURL' }),
     ...mapActions({ fetchFavoriteImagesURL: 'imageURLs/fetchFavoriteImagesURL' }),
     setFavorite (imageDetails) {
-      this.favorite = !this.favorite
       axios.put(URL + '/favorite/' + imageDetails.id).then((res) => {
         this.fetchAllImagesURL()
       })

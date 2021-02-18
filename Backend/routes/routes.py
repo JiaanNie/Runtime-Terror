@@ -122,7 +122,10 @@ class FilterLabel(Resource):
         label = param["filter_by"]
         imgs = ImageEntry.query.filter_by(label=label).all()
         for img in imgs:
-            filterd_ids.append(img.id)
+            details = {}
+            details["id"] = img.id
+            details["favorite"] = img.favorite
+            filterd_ids.append(details)
         return jsonify(filterd_ids)
 
 class ToggleFavorite(Resource):

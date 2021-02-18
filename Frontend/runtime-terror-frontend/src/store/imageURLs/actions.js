@@ -39,8 +39,13 @@ export function filterImagesByLabel (state, label) {
   } else {
     axios.get(URL + 'filter', { params: { filter_by: label } }).then((res) => {
       for (var i in res.data) {
-        var targetURL = URL + 'image/' + res.data[i]
-        urls.push(targetURL)
+        var targetURL = URL + 'image/' + res.data[i].id
+        var urlDetails = {
+          id: res.data[i].id,
+          url: targetURL,
+          favorite: res.data[i].favorite
+        }
+        urls.push(urlDetails)
       }
       state.commit('updateIDsArray', urls)
     })
