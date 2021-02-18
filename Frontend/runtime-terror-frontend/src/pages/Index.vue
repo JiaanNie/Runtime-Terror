@@ -5,8 +5,8 @@
             <q-icon name="add_a_photo" class="absolute-center" style="height: 140px; font-size: 2em; color: #BCAAA4"/>
         </q-file>
         <q-img v-for= "item in getImagesURL" :key=item.url :src=item.url style="height: 140px; max-width: 150px" class="shadow-7">
-            <q-icon v-if="!item.favorite" name="favorite_border" clickable @click="setFavorite(item)" class="absolute-bottom-right" style="font-size: 1.5em; color: #1976D2"/>
-            <q-icon v-if="item.favorite" name="favorite" clickable @click="setFavorite(item)" class="absolute-bottom-right" style="font-size: 1.5em; color: red"/>
+            <q-icon v-if="!item.favorite" name="favorite_border" clickable @click="setFavorite(item)" class="absolute-bottom-right" style="font-size: 3.5em;"/>
+            <q-icon v-if="item.favorite" clickable @click="setFavorite(item)" name="favorite" class="absolute-bottom-right" style="font-size: 3.5em; color: white"/>
         </q-img>
     </div>
     <q-page-sticky position="bottom-right" :offset="[18, 18]">
