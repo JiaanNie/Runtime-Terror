@@ -5,6 +5,21 @@ export function fetchAllImagesURL (state) {
   axios.get(URL + 'image').then(function (res) {
     for (var i in res.data) {
       var targetURL = URL + 'image/' + res.data[i]
+      var urlDetails = {
+        id: res.data[i],
+        url: targetURL
+      }
+      urls.push(urlDetails)
+    }
+    state.commit('updateIDsArray', urls)
+  })
+}
+
+export function fetchFavoriteImagesURL (state) {
+  var urls = []
+  axios.get(URL + 'image').then(function (res) {
+    for (var i in res.data) {
+      var targetURL = URL + 'image/' + res.data[i]
       urls.push(targetURL)
     }
     state.commit('updateIDsArray', urls)

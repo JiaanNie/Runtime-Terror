@@ -121,3 +121,10 @@ class FilterLabel(Resource):
         for img in imgs:
             filterd_ids.append(img.id)
         return jsonify(filterd_ids)
+
+class ToggleFavorite(Resource):
+    def put(self, image_id):
+        img = ImageEntry.query.filter_by(id=image_id).first()
+        img.favorite = not img.favorite
+        db.session.add(img)
+        db.session.commit()

@@ -4,8 +4,8 @@
         <q-file standout bottom-slots ref="file" color="grey" style="color: grey-4; height: 140px; max-width: 150px; color:transparent; " v-model="filesImages" multiple accept=".jpg, image/*" @input="uploadImages(filesImages)" >
             <q-icon name="add_a_photo" class="absolute-center" style="height: 140px; font-size: 2em; color: #BCAAA4"/>
         </q-file>
-        <q-img v-for= "item in getImagesURL" :key=item :src=item style="height: 140px; max-width: 150px" class="shadow-7">
-            <q-icon v-if="!favorite" name="favorite_border" clickable @click="setFavorite(item)" class="absolute-bottom-right" style="font-size: 1.5em;"/>
+        <q-img v-for= "item in getImagesURL" :key=item.url :src=item.url style="height: 140px; max-width: 150px" class="shadow-7">
+            <q-icon v-if="!favorite" name="favorite_border" clickable @click="setFavorite(item)" class="absolute-bottom-right" style="font-size: 1.5em; color: #1976D2"/>
             <q-icon v-if="favorite" name="favorite" clickable @click="setFavorite(item)" class="absolute-bottom-right" style="font-size: 1.5em; color: red"/>
         </q-img>
     </div>
@@ -55,9 +55,6 @@ export default {
   created: function () {
     // loading images from the db into the app fetch all the url for display each image on the app
     this.fetchAllImagesURL()
-    console.log(this.$q.dark.mode)
-    // this.$q.dark.toggle()
-    console.log(this.$q.dark.mode)
   },
   methods: {
     uploadImages (filesImages) {
@@ -89,9 +86,14 @@ export default {
       })
     },
     ...mapActions({ fetchAllImagesURL: 'imageURLs/fetchAllImagesURL' }),
-    setFavorite () {
+    setFavorite (imageDetails) {
       this.favorite = !this.favorite
-      console.log(this.favorite)
+      console.log('set favorite')
+      console.log(imageDetails)
+      console.log('here')
+      axios.put(URL + '/favorite/' + imageDetails.id).then((res) => {
+        console.log(res)
+      })
     }
   },
   computed: {
