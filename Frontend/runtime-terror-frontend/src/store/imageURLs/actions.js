@@ -20,7 +20,7 @@ export function fetchFavoriteImagesURL (state) {
   var urls = []
   axios.get(URL + 'favorite').then(function (res) {
     for (var i in res.data) {
-      var targetURL = URL + 'image/' + res.data[i]
+      var targetURL = URL + 'image/' + res.data[i].id
       var urlDetails = {
         id: res.data[i].id,
         url: targetURL,

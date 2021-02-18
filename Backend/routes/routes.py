@@ -136,8 +136,9 @@ class FetchFavoriteImages(Resource):
     def get(self):
         favorite_ids = []
         imgs = ImageEntry.query.filter_by(favorite=True).all()
-        print(imgs)
         for img in imgs:
-            favorite_ids.append(img.id)
-        print(favorite_ids)
+            details = {}
+            details["id"] = img.id
+            details["favorite"] = img.favorite
+            favorite_ids.append(details)
         return jsonify(favorite_ids)

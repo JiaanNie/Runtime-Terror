@@ -68,7 +68,6 @@ export default {
         fd.append('img', filesImages[i])
         fd.append('label', 'abc')
         axios.post(URL + 'image', fd).then(function (res) {
-          console.log(res)
           vm.fetchAllImagesURL()
         })
       }
@@ -85,19 +84,17 @@ export default {
       })
     },
     ...mapActions({ fetchAllImagesURL: 'imageURLs/fetchAllImagesURL' }),
+    ...mapActions({ fetchFavoriteImagesURL: 'imageURLs/fetchFavoriteImagesURL' }),
     setFavorite (imageDetails) {
       this.favorite = !this.favorite
       axios.put(URL + '/favorite/' + imageDetails.id).then((res) => {
-        console.log(res)
+        this.fetchAllImagesURL()
       })
     }
   },
   computed: {
     ...mapGetters({ getImagesURL: 'imageURLs/getImagesURL' }),
-    toggleFavorite (item) {
-      console.log(this.favorite, item)
-      return this.favorite
-    }
+    ...mapGetters({ getFavoriteImagesURL: 'imageURLs/getFavoriteImagesURL' })
   }
 }
 </script>
