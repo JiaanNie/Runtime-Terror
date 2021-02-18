@@ -44,7 +44,10 @@ class Image(Resource):
         list_of_ids = []
         imgs  = ImageEntry.query.all()
         for img in imgs:
-            list_of_ids.append(img.id)
+            details = {}
+            details["id"] = img.id
+            details["favorite"] = img.favorite
+            list_of_ids.append(details)
         return jsonify(list_of_ids)
 
 class FetchImageByID(Resource):
@@ -128,3 +131,13 @@ class ToggleFavorite(Resource):
         img.favorite = not img.favorite
         db.session.add(img)
         db.session.commit()
+
+class FetchFavoriteImages(Resource):
+    def get(self):
+        favorite_ids = []
+        imgs = ImageEntry.query.filter_by(favorite=True).all()
+        print(imgs)
+        for img in imgs:
+            favorite_ids.append(img.id)
+        print(favorite_ids)
+        return jsonify(favorite_ids)
