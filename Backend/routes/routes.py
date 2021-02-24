@@ -2,6 +2,7 @@ from flask_restful import Api, Resource
 from flask import request, Response, send_file, jsonify
 from db.models import *
 from datetime import datetime
+import requests as python_requests
 import os
 import config
 from werkzeug.utils import secure_filename
@@ -9,6 +10,7 @@ from collections import defaultdict
 import shutil
 from zipfile import ZipFile
 import base64
+import random
 #UPLOAD_FOLDER = 'D:\\University\\ENSE400\\Runtime-Terror\\Backend\\UploadImages'
 UPLOAD_FOLDER = config.ImageStoragePath()
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
@@ -145,3 +147,22 @@ class FetchFavoriteImages(Resource):
             details["favorite"] = img.favorite
             favorite_ids.append(details)
         return jsonify(favorite_ids)
+
+class FetchPlaceDetails(Resource):
+    def get(self):
+        list_of_name = ["Eiffel Tower", "Great Wall of China", "Leaning Tower of Pisa", "Pyramid of Giza", "Sydney Opera House in Australia", "Statue of Liberty in the USA", "Taj Mahal in India"]
+        index = random.randint(0,6)
+        google_api_key = config.GetGooglePlaceAPIKey()
+        input = list_of_name[index]
+        place_detail = 'https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input={}&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key={}'
+        res = python_requests.get(place_detail.format(input, google_api_key))
+        res = res.json()['candidates'][0]
+        print(res['name'])
+        photo_reference = res['photos'][0]['photo_reference']
+        location = res['geometry']['location']
+        response = {
+            'photo_reference': photo_reference,
+            'name': res['name'],
+            'location': location
+        }
+        return jsonify(response)
