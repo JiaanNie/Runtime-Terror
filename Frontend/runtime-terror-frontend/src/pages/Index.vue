@@ -66,7 +66,7 @@ export default {
           vm.urls.push(e.target.result)
         }
         fd.append('img', filesImages[i])
-        fd.append('label', 'abc')
+        fd.append('label', 'Unknown')
         axios.post(URL + 'image', fd).then(function (res) {
           vm.fetchAllImagesURL()
           vm.fetchAllLabels()
