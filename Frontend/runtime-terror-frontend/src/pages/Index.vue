@@ -6,7 +6,7 @@
         </q-file>
         <q-img contain v-for= "item in getImagesURL" :key=item.url :src=item.url style="height: 140px; max-width: 150px" class="shadow-7">
             <q-icon v-if="!item.favorite" name="favorite_border" clickable @click="setFavorite(item)" class="absolute-bottom-right" style="font-size: 3.5em;"/>
-            <q-icon v-if="item.favorite" clickable @click="setFavorite(item)" name="favorite" class="absolute-bottom-right" style="font-size: 3.5em; color: white"/>
+            <q-icon v-if="item.favorite" clickable @click="setFavorite(item)" name="favorite" class="absolute-bottom-right" style="font-size: 3.5em; color: red"/>
         </q-img>
     </div>
     <q-page-sticky position="bottom-right" :offset="[18, 18]">

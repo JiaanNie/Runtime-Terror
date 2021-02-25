@@ -11,18 +11,23 @@ import shutil
 from zipfile import ZipFile
 import base64
 import random
+import tensorflow as tf
+from tensorflow.keras import datasets, layers, models
+from tensorflow.keras.models import Sequential, save_model, load_model
+import numpy as np
+from PIL import Image as pil_image
 #UPLOAD_FOLDER = 'D:\\University\\ENSE400\\Runtime-Terror\\Backend\\UploadImages'
 UPLOAD_FOLDER = config.ImageStoragePath()
+model = load_model(config.MLModelPath() + "model.h5")
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 class Image(Resource):
     def post(self):
+        class_names = ['airplane', 'automobile', 'bird', 'cat', 'deer',
+               'dog', 'frog', 'horse', 'ship', 'truck']
         uploaded_image = request.files['img']
-        print(uploaded_image)
-        label = request.form["label"]
         if uploaded_image == None:
             return "No image uploaded", 400
-
-        print(dir(uploaded_image))
+        # model.predict(uploaded_image)
         ## save the image to the folder
         file_name = secure_filename(uploaded_image.filename)
         time_uploaded = datetime.now().strftime("%Y%m%d%H%M%S")
@@ -30,8 +35,12 @@ class Image(Resource):
         mime_type = uploaded_image.mimetype
         path  = os.path.join(UPLOAD_FOLDER, new_file_name)
         uploaded_image.save(path)
-
-
+        im = np.array(pil_image.open(path))
+        im = np.expand_dims(im, axis=0)
+        prediction = model.predict(im)
+        index =np.argmax(prediction)
+        label = class_names[index]
+        print(label)
         new_image = ImageEntry(
             label = label,
             mime_type = mime_type,
