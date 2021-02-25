@@ -4,7 +4,10 @@
         <q-file standout bottom-slots ref="file" color="grey" style="color: grey-4; height: 140px; max-width: 150px; color:transparent; " v-model="filesImages" multiple accept=".jpg, image/*" @input="uploadImages(filesImages)" >
             <q-icon name="add_a_photo" class="absolute-center" style="height: 140px; font-size: 2em; color: #BCAAA4"/>
         </q-file>
-        <q-img v-for= "item in getImagesURL" :key=item :src=item style="height: 140px; max-width: 150px" class="shadow-7"/>
+        <q-img contain v-for= "item in getImagesURL" :key=item.url :src=item.url style="height: 140px; max-width: 150px" class="shadow-7">
+            <q-icon v-if="!item.favorite" name="favorite_border" clickable @click="setFavorite(item)" class="absolute-bottom-right" style="font-size: 3.5em;"/>
+            <q-icon v-if="item.favorite" clickable @click="setFavorite(item)" name="favorite" class="absolute-bottom-right" style="font-size: 3.5em; color: red"/>
+        </q-img>
     </div>
     <q-page-sticky position="bottom-right" :offset="[18, 18]">
         <q-btn v-if="isDoneUploading" fab icon="done" color="accent" class="shadow-7" @click= "sortImages" />
@@ -51,9 +54,6 @@ export default {
   created: function () {
     // loading images from the db into the app fetch all the url for display each image on the app
     this.fetchAllImagesURL()
-    console.log(this.$q.dark.mode)
-    // this.$q.dark.toggle()
-    console.log(this.$q.dark.mode)
   },
   methods: {
     uploadImages (filesImages) {
@@ -68,7 +68,6 @@ export default {
         fd.append('img', filesImages[i])
         fd.append('label', 'abc')
         axios.post(URL + 'image', fd).then(function (res) {
-          console.log(res)
           vm.fetchAllImagesURL()
         })
       }
@@ -84,10 +83,17 @@ export default {
         saveAs(res.data)
       })
     },
-    ...mapActions({ fetchAllImagesURL: 'imageURLs/fetchAllImagesURL' })
+    ...mapActions({ fetchAllImagesURL: 'imageURLs/fetchAllImagesURL' }),
+    ...mapActions({ fetchFavoriteImagesURL: 'imageURLs/fetchFavoriteImagesURL' }),
+    setFavorite (imageDetails) {
+      axios.put(URL + '/favorite/' + imageDetails.id).then((res) => {
+        this.fetchAllImagesURL()
+      })
+    }
   },
   computed: {
-    ...mapGetters({ getImagesURL: 'imageURLs/getImagesURL' })
+    ...mapGetters({ getImagesURL: 'imageURLs/getImagesURL' }),
+    ...mapGetters({ getFavoriteImagesURL: 'imageURLs/getFavoriteImagesURL' })
   }
 }
 </script>
@@ -95,8 +101,5 @@ export default {
 <style >
 .q-field__control-container div {
   color: transparent;
-}
-body.body--dark {
-  background: #FFFF00
 }
 </style>
