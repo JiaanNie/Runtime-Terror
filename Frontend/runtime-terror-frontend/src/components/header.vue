@@ -16,7 +16,7 @@
       </q-input>
       <q-btn-dropdown dense flat dropdown-icon="filter_alt">
         <q-list>
-          <q-item v-for= "label in labels" :key=label clickable v-close-popup @click="filterImagesByLabel(label)">
+          <q-item v-for= "label in getLabels" :key=label clickable v-close-popup @click="filterImagesByLabel(label)">
             <q-item-section>
               <q-item-label>{{label}}</q-item-label>
             </q-item-section>
@@ -30,36 +30,37 @@
   </q-header>
 </template>
 <script>
-import axios from 'axios'
+// import axios from 'axios'
 import { mapGetters, mapActions } from 'vuex'
 // const URL = 'http://ec2-3-97-34-208.ca-central-1.compute.amazonaws.com:5000/'
-const URL = 'http://localhost:5000/'
+// const URL = 'http://localhost:5000/'
 export default {
   data () {
     return {
       isReady: false,
-      labels: [],
       showLabels: false,
       text: '',
       dropdown: false
     }
   },
   created: function () {
-    var vm = this
-    axios.get(URL + 'labels').then((res) => {
-      vm.labels.push('all')
-      for (var index in res.data) {
-        vm.labels.push(res.data[index])
-      }
-    })
-    console.log(this.labels)
+    // var vm = this
+    // axios.get(URL + 'labels').then((res) => {
+    //   vm.labels.push('all')
+    //   for (var index in res.data) {
+    //     vm.labels.push(res.data[index])
+    //   }
+    // })
+    this.fetchAllLabels()
   },
   methods: {
     ...mapActions({ filterImagesByLabel: 'imageURLs/filterImagesByLabel' }),
-    ...mapActions({ searchImages: 'imageURLs/searchImages' })
+    ...mapActions({ searchImages: 'imageURLs/searchImages' }),
+    ...mapActions({ fetchAllLabels: 'imageURLs/fetchAllLabels' })
   },
   computed: {
-    ...mapGetters({ getImagesURL: 'imageURLs/getImagesURL' })
+    ...mapGetters({ getImagesURL: 'imageURLs/getImagesURL' }),
+    ...mapGetters({ getLabels: 'imageURLs/getLabels' })
   }
 }
 </script>

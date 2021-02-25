@@ -4,3 +4,7 @@ export function getImagesURL (state) {
 export function getFavoriteImagesURL (state) {
   return state.favoriteURLArray
 }
+
+export function getLabels (state) {
+  return state.labels
+}

@@ -62,3 +62,14 @@ export function searchImages (state, inputText) {
     state.commit('updateIDsArray', urls)
   })
 }
+
+export function fetchAllLabels (state) {
+  var labels = []
+  axios.get(URL + 'labels').then((res) => {
+    labels.push('all')
+    for (var index in res.data) {
+      labels.push(res.data[index])
+    }
+  })
+  state.commit('updateLabelsArray', labels)
+}

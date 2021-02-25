@@ -69,6 +69,7 @@ export default {
         fd.append('label', 'abc')
         axios.post(URL + 'image', fd).then(function (res) {
           vm.fetchAllImagesURL()
+          vm.fetchAllLabels()
         })
       }
       vm.isDoneUploading = true
@@ -85,6 +86,7 @@ export default {
     },
     ...mapActions({ fetchAllImagesURL: 'imageURLs/fetchAllImagesURL' }),
     ...mapActions({ fetchFavoriteImagesURL: 'imageURLs/fetchFavoriteImagesURL' }),
+    ...mapActions({ fetchAllLabels: 'imageURLs/fetchAllLabels' }),
     setFavorite (imageDetails) {
       axios.put(URL + '/favorite/' + imageDetails.id).then((res) => {
         this.fetchAllImagesURL()
