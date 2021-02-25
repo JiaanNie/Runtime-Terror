@@ -27,7 +27,7 @@ class Image(Resource):
         uploaded_image = request.files['img']
         if uploaded_image == None:
             return "No image uploaded", 400
-        # model.predict(uploaded_image)
+        label = request.form["label"]
         ## save the image to the folder
         file_name = secure_filename(uploaded_image.filename)
         time_uploaded = datetime.now().strftime("%Y%m%d%H%M%S")
@@ -36,11 +36,12 @@ class Image(Resource):
         path  = os.path.join(UPLOAD_FOLDER, new_file_name)
         uploaded_image.save(path)
         im = np.array(pil_image.open(path))
-        im = np.expand_dims(im, axis=0)
-        prediction = model.predict(im)
-        index =np.argmax(prediction)
-        label = class_names[index]
-        print(label)
+        print(im.shape)
+        if im.shape == (32,32,3):
+            im = np.expand_dims(im, axis=0)
+            prediction = model.predict(im)
+            index =np.argmax(prediction)
+            label = class_names[index]
         new_image = ImageEntry(
             label = label,
             mime_type = mime_type,
