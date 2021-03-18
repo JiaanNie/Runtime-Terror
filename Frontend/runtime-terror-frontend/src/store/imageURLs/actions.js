@@ -59,6 +59,7 @@ export function searchImages (state, inputText) {
       var targetURL = URL + 'image/' + res.data[i]
       urls.push(targetURL)
     }
+    console.log(urls)
     state.commit('updateIDsArray', urls)
   })
 }
