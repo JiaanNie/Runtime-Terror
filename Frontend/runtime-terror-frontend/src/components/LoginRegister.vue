@@ -20,13 +20,13 @@
         <q-input
             filled
             v-model="formData.password"
-            :type="isPwd ? 'password' : 'text'"
+            :type="formData.isPwd ? 'password' : 'text'"
             label="Password">
             <template v-slot:append>
                 <q-icon
-                    :name="isPwd ? 'visibility_off' : 'visibility'"
+                    :name="formData.isPwd ? 'visibility_off' : 'visibility'"
                     class="cursor-pointer"
-                    @click="isPwd = !isPwd"
+                    @click="formData.isPwd = !formData.isPwd"
                 />
             </template>
         </q-input>
@@ -57,7 +57,7 @@ export default {
   methods: {
     onSubmit () {
       if (this.tab === 'login') {
-        console.log('login the user')
+        this.$router.push('/HomePage')
       } else {
         console.log('register the user')
       }
