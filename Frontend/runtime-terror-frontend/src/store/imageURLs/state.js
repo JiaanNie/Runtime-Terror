@@ -1,5 +1,7 @@
 export default function () {
   return {
-    imageURLArray: []
+    imageURLArray: [],
+    favoriteURLArray: [],
+    labels: ['all']
   }
 }

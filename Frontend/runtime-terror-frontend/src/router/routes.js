@@ -4,6 +4,14 @@ const routes = [
     path: '/',
     component: () => import('layouts/IndexLayout.vue'),
     children: [
+      { path: '', component: () => import('pages/UserAuth.vue') }
+    ]
+  },
+
+  {
+    path: '/HomePage',
+    component: () => import('layouts/IndexLayout.vue'),
+    children: [
       { path: '', component: () => import('pages/Index.vue') }
     ]
   },

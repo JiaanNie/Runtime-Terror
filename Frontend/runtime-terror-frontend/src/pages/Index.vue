@@ -1,10 +1,13 @@
 <template>
-  <q-page class="bg-grey-2" padding>
+  <q-page padding>
     <div class="q-gutter-lg row items-start justify-evenly">
-        <q-file standout bottom-slots ref="file" color="grey" style="color: grey-4; height: 140px; max-width: 150px; color:transparent; " bg-color="grey-4" v-model="filesImages" multiple accept=".jpg, image/*" @input="uploadImages(filesImages)" >
+        <q-file standout bottom-slots ref="file" color="grey" style="color: grey-4; height: 140px; max-width: 150px; color:transparent; " v-model="filesImages" multiple accept=".jpg, image/*" @input="uploadImages(filesImages)" >
             <q-icon name="add_a_photo" class="absolute-center" style="height: 140px; font-size: 2em; color: #BCAAA4"/>
         </q-file>
-        <q-img v-for= "item in getImagesURL" :key=item :src=item style="height: 140px; max-width: 150px" class="shadow-7"/>
+        <q-img contain v-for= "item in getImagesURL" :key=item.url :src=item.url style="height: 140px; max-width: 150px" class="shadow-7">
+            <q-icon v-if="!item.favorite" name="favorite_border" clickable @click="setFavorite(item)" class="absolute-bottom-right" style="font-size: 3.5em;"/>
+            <q-icon v-if="item.favorite" clickable @click="setFavorite(item)" name="favorite" class="absolute-bottom-right" style="font-size: 3.5em; color: red"/>
+        </q-img>
     </div>
     <q-page-sticky position="bottom-right" :offset="[18, 18]">
         <q-btn v-if="isDoneUploading" fab icon="done" color="accent" class="shadow-7" @click= "sortImages" />
@@ -49,8 +52,8 @@ export default {
     }
   },
   created: function () {
-    this.setImagesURL()
-    // this.urls = this.getImagesURL
+    // loading images from the db into the app fetch all the url for display each image on the app
+    this.fetchAllImagesURL()
   },
   methods: {
     uploadImages (filesImages) {
@@ -63,10 +66,10 @@ export default {
           vm.urls.push(e.target.result)
         }
         fd.append('img', filesImages[i])
-        fd.append('label', 'abc')
+        fd.append('label', 'Unknown')
         axios.post(URL + 'image', fd).then(function (res) {
-          console.log(res)
-          vm.setImagesURL()
+          vm.fetchAllImagesURL()
+          vm.fetchAllLabels()
         })
       }
       vm.isDoneUploading = true
@@ -78,14 +81,21 @@ export default {
     },
     getZip () {
       axios.get(URL + 'sort', { responseType: 'blob' }).then(function (res) {
-        console.log(res.data)
         saveAs(res.data)
       })
     },
-    ...mapActions({ setImagesURL: 'imageURLs/setImagesURL' })
+    ...mapActions({ fetchAllImagesURL: 'imageURLs/fetchAllImagesURL' }),
+    ...mapActions({ fetchFavoriteImagesURL: 'imageURLs/fetchFavoriteImagesURL' }),
+    ...mapActions({ fetchAllLabels: 'imageURLs/fetchAllLabels' }),
+    setFavorite (imageDetails) {
+      axios.put(URL + '/favorite/' + imageDetails.id).then((res) => {
+        this.fetchAllImagesURL()
+      })
+    }
   },
   computed: {
-    ...mapGetters({ getImagesURL: 'imageURLs/getImagesURL' })
+    ...mapGetters({ getImagesURL: 'imageURLs/getImagesURL' }),
+    ...mapGetters({ getFavoriteImagesURL: 'imageURLs/getFavoriteImagesURL' })
   }
 }
 </script>
