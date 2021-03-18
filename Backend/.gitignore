@@ -5,3 +5,4 @@ UploadImages/*
 *.zip
 SortedImages/*
 __pycache__/
+keys.json

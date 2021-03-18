@@ -22,5 +22,7 @@ api.add_resource(FilterLabel, "/filter")
 api.add_resource(ToggleFavorite, "/favorite/<image_id>")
 api.add_resource(FetchFavoriteImages, "/favorite")
 api.add_resource(FetchPlaceDetails, "/places")
+api.add_resource(Login, "/login")
+api.add_resource(Register, "/signup")
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug="True")
