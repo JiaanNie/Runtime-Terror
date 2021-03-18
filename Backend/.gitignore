@@ -6,4 +6,3 @@ UploadImages/*
 SortedImages/*
 __pycache__/
 keys.json
- Backend/db/__pycache__/models.cpython-38.pyc
