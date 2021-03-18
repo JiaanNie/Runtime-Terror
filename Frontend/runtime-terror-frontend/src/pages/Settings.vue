@@ -4,7 +4,6 @@
       <q-list bordered padding>
         <q-item-label header>User Controls</q-item-label>
         <q-separator spaced />
-        <q-item-label header>Notifications</q-item-label>
         <q-item tag="label" v-ripple>
           <q-item-section>
             <q-item-label>Dark mode</q-item-label>
@@ -19,6 +18,11 @@
           </q-item-section>
           <q-item-section side >
             <q-toggle color="blue" v-model="notif1" val="battery" @input="toggle"/>
+          </q-item-section>
+        </q-item>
+        <q-item tag="label" v-ripple>
+          <q-item-section>
+            <q-item-label>Log Out</q-item-label>
           </q-item-section>
         </q-item>
         <q-separator spaced />
