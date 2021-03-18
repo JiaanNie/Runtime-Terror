@@ -16,9 +16,13 @@ from tensorflow.keras import datasets, layers, models
 from tensorflow.keras.models import Sequential, save_model, load_model
 import numpy as np
 from PIL import Image as pil_image
+from google.cloud import vision
+import io
+import time
+import uuid
 #UPLOAD_FOLDER = 'D:\\University\\ENSE400\\Runtime-Terror\\Backend\\UploadImages'
 UPLOAD_FOLDER = config.ImageStoragePath()
-model = load_model(config.MLModelPath() + "model.h5")
+# model = load_model(config.MLModelPath() + "model.h5")
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 class Image(Resource):
     def post(self):
@@ -27,7 +31,7 @@ class Image(Resource):
         uploaded_image = request.files['img']
         if uploaded_image == None:
             return "No image uploaded", 400
-        label = request.form["label"]
+        # self.label = request.form["label"]
         ## save the image to the folder
         file_name = secure_filename(uploaded_image.filename)
         time_uploaded = datetime.now().strftime("%Y%m%d%H%M%S")
@@ -41,9 +45,11 @@ class Image(Resource):
             im = np.expand_dims(im, axis=0)
             prediction = model.predict(im)
             index =np.argmax(prediction)
-            label = class_names[index]
+            self.label = class_names[index]
+        self.label = self.detect_landmarks(path)
+        print(self.label)
         new_image = ImageEntry(
-            label = label,
+            label = self.label,
             mime_type = mime_type,
             file_name = new_file_name,
             image_path = path,
@@ -51,6 +57,17 @@ class Image(Resource):
         )
         db.session.add(new_image)
         db.session.commit()
+    def detect_landmarks(self, path):
+        client = vision.ImageAnnotatorClient()
+        with io.open(path, 'rb') as image_file:
+            content = image_file.read()
+        image = vision.Image(content=content)
+        response = client.landmark_detection(image=image)
+        if not response:
+            return None
+        else:
+            return response.landmark_annotations[0].description
+
 
     def get(self):
         list_of_ids = []
@@ -115,11 +132,6 @@ class Search(Resource):
     def post(self):
         ids = []
         text = request.json['text']
-        # searchable_columns = ['file_name', 'mime_type', 'label']
-        # for column in searchable_columns:
-        #     result = ImageEntry.query.filter_by(getattr(ImageEntry, column).ilike("%"+text+"")).all()
-        #     if result != []:
-        #         query = query + result
         result = ImageEntry.query.filter(ImageEntry.file_name.like("%"+ text + "%")).all()
         result += ImageEntry.query.filter(ImageEntry.mime_type.like("%"+ text + "%")).all()
         result += ImageEntry.query.filter(ImageEntry.label.like("%"+ text + "%")).all()
@@ -176,3 +188,29 @@ class FetchPlaceDetails(Resource):
             'location': location
         }
         return jsonify(response)
+
+class Login(Resource):
+    def post(self):
+        email = request.json['email']
+        password = request.json['password']
+        q = User.query.filter((User.email==email) & (User.password==password)).first()
+        if q is not None:
+            return q.uuid
+        else:
+            return 404, "invaild account"
+
+class Register(Resource):
+    def post(self):
+        email = request.json['email']
+        password = request.json['password']
+        q = User.query.filter_by(email=email).first()
+        if q is None:
+            new_user = User(
+                uuid= uuid.uuid1(),
+                email=email,
+                password=password
+            )
+            db.session.add(new_user)
+            db.session.commit()
+        else:
+            return 409, "Account already exits!"

@@ -44,13 +44,6 @@ export default {
     }
   },
   created: function () {
-    // var vm = this
-    // axios.get(URL + 'labels').then((res) => {
-    //   vm.labels.push('all')
-    //   for (var index in res.data) {
-    //     vm.labels.push(res.data[index])
-    //   }
-    // })
     this.fetchAllLabels()
   },
   methods: {
