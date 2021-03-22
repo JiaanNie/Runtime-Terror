@@ -59,7 +59,7 @@ export default {
       if (this.tab === 'login') {
         this.$router.push('/HomePage')
       } else {
-        console.log('register the user')
+        this.$router.push('/')
       }
     }
   }

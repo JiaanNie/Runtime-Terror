@@ -71,6 +71,6 @@ export function fetchAllLabels (state) {
     for (var index in res.data) {
       labels.push(res.data[index])
     }
+    state.commit('updateLabelsArray', labels)
   })
-  state.commit('updateLabelsArray', labels)
 }

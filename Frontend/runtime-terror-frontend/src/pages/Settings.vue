@@ -22,7 +22,7 @@
         </q-item>
         <q-item tag="label" v-ripple>
           <q-item-section>
-            <q-item-label>Log Out</q-item-label>
+            <q-item-label @click="logout">Log Out</q-item-label>
           </q-item-section>
         </q-item>
         <q-separator spaced />
@@ -77,6 +77,9 @@ export default {
       } else {
         colors.setBrand('primary', '#1976D2')
       }
+    },
+    logout () {
+      this.$router.push('/')
     }
   }
 }

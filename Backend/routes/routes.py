@@ -20,9 +20,11 @@ from google.cloud import vision
 import io
 import time
 import uuid
+# import panda as pd
 #UPLOAD_FOLDER = 'D:\\University\\ENSE400\\Runtime-Terror\\Backend\\UploadImages'
 UPLOAD_FOLDER = config.ImageStoragePath()
 # model = load_model(config.MLModelPath() + "model.h5")
+# data = pd.read_csv(config.MLModelPath()+ "label_name.csv")
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 class Image(Resource):
     def post(self):
@@ -41,7 +43,7 @@ class Image(Resource):
         uploaded_image.save(path)
         im = np.array(pil_image.open(path))
         print(im.shape)
-        if im.shape == (32,32,3):
+        if im.shape == (224,224,3):
             im = np.expand_dims(im, axis=0)
             prediction = model.predict(im)
             index =np.argmax(prediction)
@@ -53,7 +55,8 @@ class Image(Resource):
             mime_type = mime_type,
             file_name = new_file_name,
             image_path = path,
-            favorite = False
+            favorite = False,
+            user_id = "8639fa92-8796-11eb-b5af-94b86d6572d1"
         )
         db.session.add(new_image)
         db.session.commit()
