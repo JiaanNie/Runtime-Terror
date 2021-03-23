@@ -13,5 +13,7 @@ export function login (state, credential) {
   })
 }
 export function logout (state) {
-
+  state.commit('updateUserUUID', '')
+  state.commit('updateLoginState', false)
+  this.$router.push('/')
 }

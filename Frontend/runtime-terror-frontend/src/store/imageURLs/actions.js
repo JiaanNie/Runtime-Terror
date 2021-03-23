@@ -1,5 +1,8 @@
 import axios from 'axios'
 const URL = 'http://localhost:5000/'
+var headers = {
+  user: 'abc wilson test'
+}
 export function fetchAllImagesURL (state) {
   var urls = []
   axios.get(URL + 'image').then(function (res) {
@@ -66,11 +69,16 @@ export function searchImages (state, inputText) {
 
 export function fetchAllLabels (state) {
   var labels = []
-  axios.get(URL + 'labels').then((res) => {
-    labels.push('all')
-    for (var index in res.data) {
-      labels.push(res.data[index])
-    }
-    state.commit('updateLabelsArray', labels)
-  })
+  headers.user = state.rootGetters['user/getUserUUID']
+  if (headers.user === '') {
+    this.$router.push('/')
+  } else {
+    axios.get(URL + 'labels', { headers }).then((res) => {
+      labels.push('all')
+      for (var index in res.data) {
+        labels.push(res.data[index])
+      }
+      state.commit('updateLabelsArray', labels)
+    })
+  }
 }

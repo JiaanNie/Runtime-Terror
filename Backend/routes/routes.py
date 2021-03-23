@@ -92,6 +92,7 @@ class FetchImageByID(Resource):
 
 class FetchLabel(Resource):
     def get(self):
+        print(request.headers)
         result = []
         labels = ImageEntry.query.with_entities(ImageEntry.label).distinct().all()
         for lable in labels:
