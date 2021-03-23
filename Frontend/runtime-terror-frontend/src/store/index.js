@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 
 // import example from './module-example'
 import imageURLs from './imageURLs'
+import user from './user'
 Vue.use(Vuex)
 
 /*
@@ -18,7 +19,8 @@ export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
     modules: {
       // example
-      imageURLs
+      imageURLs,
+      user
     },
 
     // enable strict mode (adds overhead!)

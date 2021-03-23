@@ -1,6 +1,6 @@
 export default function () {
   return {
-    userUUID: "",
+    userUUID: '',
     isUserLoginn: false
   }
 }

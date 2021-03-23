@@ -42,6 +42,7 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
 export default {
   props: ['tab'],
   data () {
@@ -54,14 +55,21 @@ export default {
       }
     }
   },
+  computed: {
+    ...mapGetters({ getImagesURL: 'imageURLs/getImagesURL' }),
+    ...mapGetters({ getLabels: 'imageURLs/getLabels' })
+  },
   methods: {
     onSubmit () {
       if (this.tab === 'login') {
-        this.$router.push('/HomePage')
+        this.login('exmaple1@gmail.com', 'abc1234')
+        // this.$router.push('/HomePage')
       } else {
         this.$router.push('/')
       }
-    }
+    },
+    ...mapActions({ login: 'user/login' }),
+    ...mapActions({ logout: 'user/logout' })
   }
 }
 </script>
