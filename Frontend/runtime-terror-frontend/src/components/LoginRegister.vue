@@ -56,20 +56,20 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({ getImagesURL: 'imageURLs/getImagesURL' }),
-    ...mapGetters({ getLabels: 'imageURLs/getLabels' })
+    ...mapGetters({ getUserUUID: 'user/getUserUUID' }),
+    ...mapGetters({ getLoginStatus: 'user/getLoginState' })
   },
   methods: {
+    ...mapActions({ login: 'user/login' }),
+    ...mapActions({ logout: 'user/logout' }),
     onSubmit () {
       if (this.tab === 'login') {
-        this.login('exmaple1@gmail.com', 'abc1234')
-        // this.$router.push('/HomePage')
-      } else {
-        this.$router.push('/')
+        var credential = {}
+        credential.email = this.formData.email
+        credential.password = this.formData.password
+        this.login(credential)
       }
-    },
-    ...mapActions({ login: 'user/login' }),
-    ...mapActions({ logout: 'user/logout' })
+    }
   }
 }
 </script>

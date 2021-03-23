@@ -196,6 +196,7 @@ class Login(Resource):
     def post(self):
         email = request.json['email']
         password = request.json['password']
+        print(email, password)
         q = User.query.filter((User.email==email) & (User.password==password)).first()
         if q is not None:
             return q.uuid
