@@ -62,12 +62,17 @@ export default {
   methods: {
     ...mapActions({ login: 'user/login' }),
     ...mapActions({ logout: 'user/logout' }),
+    ...mapActions({ signup: 'user/signUp' }),
     onSubmit () {
+      var credential = {}
       if (this.tab === 'login') {
-        var credential = {}
         credential.email = this.formData.email
         credential.password = this.formData.password
         this.login(credential)
+      } else {
+        credential.email = this.formData.email
+        credential.password = this.formData.password
+        this.signup(credential)
       }
     }
   }

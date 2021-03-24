@@ -58,6 +58,9 @@ export default {
   methods: {
     uploadImages (filesImages) {
       var vm = this
+      var headers = {
+        user: this.getUserUUID
+      }
       for (var i = 0; i < filesImages.length; i++) {
         var reader = new FileReader()
         var fd = new FormData()
@@ -67,7 +70,7 @@ export default {
         }
         fd.append('img', filesImages[i])
         fd.append('label', 'Unknown')
-        axios.post(URL + 'image', fd).then(function (res) {
+        axios.post(URL + 'image', fd, { headers: headers }).then(function (res) {
           vm.fetchAllImagesURL()
           vm.fetchAllLabels()
         })
@@ -95,7 +98,8 @@ export default {
   },
   computed: {
     ...mapGetters({ getImagesURL: 'imageURLs/getImagesURL' }),
-    ...mapGetters({ getFavoriteImagesURL: 'imageURLs/getFavoriteImagesURL' })
+    ...mapGetters({ getFavoriteImagesURL: 'imageURLs/getFavoriteImagesURL' }),
+    ...mapGetters({ getUserUUID: 'user/getUserUUID' })
   }
 }
 </script>

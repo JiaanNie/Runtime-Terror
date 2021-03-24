@@ -43,7 +43,7 @@ export function filterImagesByLabel (state, label) {
   if (label === 'all') {
     state.dispatch('fetchAllImagesURL')
   } else {
-    axios.get(URL + 'filter', { params: { filter_by: label, headers } }).then((res) => {
+    axios.get(URL + 'filter', { headers: headers, params: { filter_by: label } }).then((res) => {
       for (var i in res.data) {
         var targetURL = URL + 'image/' + res.data[i].id
         var urlDetails = {
