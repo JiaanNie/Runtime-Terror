@@ -28,6 +28,7 @@ UPLOAD_FOLDER = config.ImageStoragePath()
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 class Image(Resource):
     def post(self):
+        user_uuid = request.headers["user"]
         class_names = ['airplane', 'automobile', 'bird', 'cat', 'deer',
                'dog', 'frog', 'horse', 'ship', 'truck']
         uploaded_image = request.files['img']
@@ -56,7 +57,7 @@ class Image(Resource):
             file_name = new_file_name,
             image_path = path,
             favorite = False,
-            user_id = "8639fa92-8796-11eb-b5af-94b86d6572d1"
+            user_id = user_uuid
         )
         db.session.add(new_image)
         db.session.commit()
@@ -74,7 +75,8 @@ class Image(Resource):
 
     def get(self):
         list_of_ids = []
-        imgs  = ImageEntry.query.all()
+        user_uuid = request.headers["user"]
+        imgs  = ImageEntry.query.filter_by(user_id=user_uuid).all()
         for img in imgs:
             details = {}
             details["id"] = img.id
@@ -84,6 +86,7 @@ class Image(Resource):
 
 class FetchImageByID(Resource):
     def get(self, image_id):
+        print(image_id)
         img = ImageEntry.query.filter_by(id=image_id).first()
         print(img.image_path)
         data = open(img.image_path, "rb").read()
@@ -92,9 +95,9 @@ class FetchImageByID(Resource):
 
 class FetchLabel(Resource):
     def get(self):
-        print(request.headers)
+        user_uuid = request.headers["user"]
         result = []
-        labels = ImageEntry.query.with_entities(ImageEntry.label).distinct().all()
+        labels = ImageEntry.query.filter_by(user_id=user_uuid).with_entities(ImageEntry.label).distinct().all()
         for lable in labels:
             result.append(lable[0])
         return result
@@ -135,10 +138,11 @@ class SorteImage(Resource):
 class Search(Resource):
     def post(self):
         ids = []
+        user_uuid = request.headers["user"]
         text = request.json['text']
-        result = ImageEntry.query.filter(ImageEntry.file_name.like("%"+ text + "%")).all()
-        result += ImageEntry.query.filter(ImageEntry.mime_type.like("%"+ text + "%")).all()
-        result += ImageEntry.query.filter(ImageEntry.label.like("%"+ text + "%")).all()
+        result = ImageEntry.query.filter_by(user_id=user_uuid).filter(ImageEntry.file_name.like("%"+ text + "%")).all()
+        result += ImageEntry.query.filter_by(user_id=user_uuid).filter(ImageEntry.mime_type.like("%"+ text + "%")).all()
+        result += ImageEntry.query.filter_by(user_id=user_uuid).filter(ImageEntry.label.like("%"+ text + "%")).all()
         for img in result:
             ids.append(img.id)
         return jsonify(ids)
@@ -148,7 +152,8 @@ class FilterLabel(Resource):
         filterd_ids = []
         param = request.args.to_dict()
         label = param["filter_by"]
-        imgs = ImageEntry.query.filter_by(label=label).all()
+        user_uuid = request.headers["user"]
+        imgs = ImageEntry.query.filter_by(user_id=user_uuid).filter_by(label=label).all()
         for img in imgs:
             details = {}
             details["id"] = img.id
@@ -166,7 +171,8 @@ class ToggleFavorite(Resource):
 class FetchFavoriteImages(Resource):
     def get(self):
         favorite_ids = []
-        imgs = ImageEntry.query.filter_by(favorite=True).all()
+        user_uuid = request.headers["user"]
+        imgs = ImageEntry.query.filter_by(user_id=user_uuid).filter_by(favorite=True).all()
         for img in imgs:
             details = {}
             details["id"] = img.id

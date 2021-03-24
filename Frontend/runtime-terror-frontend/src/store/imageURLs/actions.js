@@ -5,7 +5,8 @@ var headers = {
 }
 export function fetchAllImagesURL (state) {
   var urls = []
-  axios.get(URL + 'image').then(function (res) {
+  headers.user = state.rootGetters['user/getUserUUID']
+  axios.get(URL + 'image', { headers }).then(function (res) {
     for (var i in res.data) {
       var targetURL = URL + 'image/' + res.data[i].id
       var urlDetails = {
@@ -21,7 +22,8 @@ export function fetchAllImagesURL (state) {
 
 export function fetchFavoriteImagesURL (state) {
   var urls = []
-  axios.get(URL + 'favorite').then(function (res) {
+  headers.user = state.rootGetters['user/getUserUUID']
+  axios.get(URL + 'favorite', { headers }).then(function (res) {
     for (var i in res.data) {
       var targetURL = URL + 'image/' + res.data[i].id
       var urlDetails = {
@@ -37,10 +39,11 @@ export function fetchFavoriteImagesURL (state) {
 
 export function filterImagesByLabel (state, label) {
   var urls = []
+  headers.user = state.rootGetters['user/getUserUUID']
   if (label === 'all') {
     state.dispatch('fetchAllImagesURL')
   } else {
-    axios.get(URL + 'filter', { params: { filter_by: label } }).then((res) => {
+    axios.get(URL + 'filter', { params: { filter_by: label, headers } }).then((res) => {
       for (var i in res.data) {
         var targetURL = URL + 'image/' + res.data[i].id
         var urlDetails = {
@@ -57,6 +60,7 @@ export function filterImagesByLabel (state, label) {
 
 export function searchImages (state, inputText) {
   var urls = []
+  headers.user = state.rootGetters['user/getUserUUID']
   axios.post(URL + 'search', { text: inputText }).then((res) => {
     for (var i in res.data) {
       var targetURL = URL + 'image/' + res.data[i]
