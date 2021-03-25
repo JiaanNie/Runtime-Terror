@@ -53,6 +53,8 @@ class Image(Resource):
                 index =np.argmax(prediction)
                 self.label = class_names[index]
         print("google vision setting: ", google_vision_setting, self.label)
+        if self.label is None:
+            self.label = "Unknown"
         new_image = ImageEntry(
             label = self.label,
             mime_type = mime_type,
