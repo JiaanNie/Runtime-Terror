@@ -2,19 +2,28 @@
   <q-page padding>
     <div class="q-pa-md" style="max-width: 100%">
       <q-list bordered padding>
-        <q-item-label header>User Controls</q-item-label>
+        <q-item-label header>Account Info</q-item-label>
+        <q-item tag="lable" v-ripple>
+          <q-item-section>
+            <q-item-label>Enable Google Vision</q-item-label>
+          </q-item-section>
+          <q-item-section side >
+            <q-toggle color="blue" v-model="getGoogleVersionModle" val="battery" @input="setGoogleVersionModel(!getGoogleVersionModle)"/>
+          </q-item-section>
+        </q-item>
+        <q-item tag="label" v-ripple>
+          <q-item-section>
+            <q-item-label>Log Out</q-item-label>
+          </q-item-section>
+          <q-item-section side >
+            <q-icon name="fas fa-sign-out-alt" @click="logout"/>
+          </q-item-section>
+        </q-item>
         <q-separator spaced />
+        <q-item-label header>Application Settings</q-item-label>
         <q-item tag="label" v-ripple>
           <q-item-section>
             <q-item-label>Dark mode</q-item-label>
-          </q-item-section>
-          <q-item-section side >
-            <q-toggle color="blue" v-model="notif1" val="battery" @input="toggle"/>
-          </q-item-section>
-        </q-item>
-        <q-item tag="lable" v-ripple>
-          <q-item-section>
-            <q-item-label>Clear Database</q-item-label>
           </q-item-section>
           <q-item-section side >
             <q-toggle color="blue" v-model="notif1" val="battery" @input="toggle"/>
@@ -61,6 +70,7 @@
 
 <script>
 import { colors } from 'quasar'
+import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'Settings',
   data () {
@@ -80,7 +90,11 @@ export default {
     },
     logout () {
       this.$router.push('/')
-    }
+    },
+    ...mapActions({ setGoogleVersionModel: 'user/setGoogleVersionModel' })
+  },
+  computed: {
+    ...mapGetters({ getGoogleVersionModle: 'user/getGoogleVersionModle' })
   }
 }
 </script>

@@ -1,6 +1,7 @@
 export default function () {
   return {
     userUUID: '',
-    isUserLoginn: false
+    isUserLoginn: false,
+    googleVersionModle: false
   }
 }

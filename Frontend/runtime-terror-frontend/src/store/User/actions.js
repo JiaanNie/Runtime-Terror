@@ -22,3 +22,7 @@ export function signUp (state, credential) {
     console.log(res)
   })
 }
+
+export function setGoogleVersionModel (state, setting) {
+  state.commit('updateGoogleVersionModelStatus', setting)
+}

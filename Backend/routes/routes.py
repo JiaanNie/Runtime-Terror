@@ -20,18 +20,19 @@ from google.cloud import vision
 import io
 import time
 import uuid
-# import panda as pd
+import pandas as pd
 #UPLOAD_FOLDER = 'D:\\University\\ENSE400\\Runtime-Terror\\Backend\\UploadImages'
 UPLOAD_FOLDER = config.ImageStoragePath()
-# model = load_model(config.MLModelPath() + "model.h5")
-# data = pd.read_csv(config.MLModelPath()+ "label_name.csv")
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
+model = load_model(config.MLModelPath() + "model.h5")
+data = pd.read_csv(config.MLModelPath()+ "label_names.csv")
+STANDARD_SHAPE = (224, 224)
 class Image(Resource):
     def post(self):
         user_uuid = request.headers["user"]
-        class_names = ['airplane', 'automobile', 'bird', 'cat', 'deer',
-               'dog', 'frog', 'horse', 'ship', 'truck']
+        param = request.args.to_dict()
+        google_vision_setting = param["GoogleVisionModel"]
         uploaded_image = request.files['img']
+        class_names = data["name"].values.tolist()
         if uploaded_image == None:
             return "No image uploaded", 400
         # self.label = request.form["label"]
@@ -42,15 +43,16 @@ class Image(Resource):
         mime_type = uploaded_image.mimetype
         path  = os.path.join(UPLOAD_FOLDER, new_file_name)
         uploaded_image.save(path)
-        im = np.array(pil_image.open(path))
-        print(im.shape)
-        if im.shape == (224,224,3):
-            im = np.expand_dims(im, axis=0)
-            prediction = model.predict(im)
-            index =np.argmax(prediction)
-            self.label = class_names[index]
-        self.label = self.detect_landmarks(path)
-        print(self.label)
+        if google_vision_setting == 'true':
+            self.label = self.detect_landmarks(path)
+        else:
+            im = np.array(pil_image.open(path).resize(STANDARD_SHAPE))
+            if im.shape == (224,224,3):
+                im = np.expand_dims(im, axis=0)
+                prediction = model.predict(im)
+                index =np.argmax(prediction)
+                self.label = class_names[index]
+        print("google vision setting: ", google_vision_setting, self.label)
         new_image = ImageEntry(
             label = self.label,
             mime_type = mime_type,

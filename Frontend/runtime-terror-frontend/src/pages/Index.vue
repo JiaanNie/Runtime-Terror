@@ -70,7 +70,7 @@ export default {
         }
         fd.append('img', filesImages[i])
         fd.append('label', 'Unknown')
-        axios.post(URL + 'image', fd, { headers: headers }).then(function (res) {
+        axios.post(URL + 'image', fd, { headers: headers, params: { GoogleVisionModel: this.getGoogleVersionModle } }).then(function (res) {
           vm.fetchAllImagesURL()
           vm.fetchAllLabels()
         })
@@ -99,7 +99,8 @@ export default {
   computed: {
     ...mapGetters({ getImagesURL: 'imageURLs/getImagesURL' }),
     ...mapGetters({ getFavoriteImagesURL: 'imageURLs/getFavoriteImagesURL' }),
-    ...mapGetters({ getUserUUID: 'user/getUserUUID' })
+    ...mapGetters({ getUserUUID: 'user/getUserUUID' }),
+    ...mapGetters({ getGoogleVersionModle: 'user/getGoogleVersionModle' })
   }
 }
 </script>
