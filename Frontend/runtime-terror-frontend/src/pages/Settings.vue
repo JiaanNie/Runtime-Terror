@@ -5,10 +5,10 @@
         <q-item-label header>Account Info</q-item-label>
         <q-item tag="lable">
           <q-item-section>
-            <q-item-label>User ID</q-item-label>
+            <q-item-label>User Email</q-item-label>
           </q-item-section>
           <q-item-section side >
-            <q-input :placeholder="this.getUserUUID" readonly/>
+            <q-input :placeholder="this.getUserEmail" readonly/>
           </q-item-section>
         </q-item>
         <q-item tag="lable" v-ripple>
@@ -35,11 +35,6 @@
           </q-item-section>
           <q-item-section side >
             <q-toggle color="blue" v-model="notif1" val="battery" @input="toggle"/>
-          </q-item-section>
-        </q-item>
-        <q-item tag="label" v-ripple>
-          <q-item-section>
-            <q-item-label @click="logout">Log Out</q-item-label>
           </q-item-section>
         </q-item>
         <q-separator spaced />
@@ -103,7 +98,8 @@ export default {
   },
   computed: {
     ...mapGetters({ getGoogleVersionModle: 'user/getGoogleVersionModle' }),
-    ...mapGetters({ getUserUUID: 'user/getUserUUID' })
+    ...mapGetters({ getUserUUID: 'user/getUserUUID' }),
+    ...mapGetters({ getUserEmail: 'user/getUserEmail' })
   }
 }
 </script>
