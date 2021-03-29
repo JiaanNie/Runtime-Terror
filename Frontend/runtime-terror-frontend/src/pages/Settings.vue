@@ -3,6 +3,14 @@
     <div class="q-pa-md" style="max-width: 100%">
       <q-list bordered padding>
         <q-item-label header>Account Info</q-item-label>
+        <q-item tag="lable">
+          <q-item-section>
+            <q-item-label>User ID</q-item-label>
+          </q-item-section>
+          <q-item-section side >
+            <q-input :placeholder="this.getUserUUID" readonly/>
+          </q-item-section>
+        </q-item>
         <q-item tag="lable" v-ripple>
           <q-item-section>
             <q-item-label>Enable Google Vision</q-item-label>
@@ -94,7 +102,8 @@ export default {
     ...mapActions({ setGoogleVersionModel: 'user/setGoogleVersionModel' })
   },
   computed: {
-    ...mapGetters({ getGoogleVersionModle: 'user/getGoogleVersionModle' })
+    ...mapGetters({ getGoogleVersionModle: 'user/getGoogleVersionModle' }),
+    ...mapGetters({ getUserUUID: 'user/getUserUUID' })
   }
 }
 </script>

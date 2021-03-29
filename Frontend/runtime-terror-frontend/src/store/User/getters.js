@@ -7,3 +7,6 @@ export function getLoginState (state) {
 export function getGoogleVersionModle (state) {
   return state.googleVersionModle
 }
+export function getUserEmail (state) {
+  return state.userEmail
+}

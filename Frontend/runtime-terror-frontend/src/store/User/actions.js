@@ -5,8 +5,10 @@ export function login (state, credential) {
     if (res.data === 404) {
       console.log('invaild credential')
     } else {
-      state.commit('updateUserUUID', res.data)
+      console.log(res.data)
+      state.commit('updateUserUUID', res.data.uuid)
       state.commit('updateLoginState', true)
+      state.commit('updateUserEmail', res.data.email)
       this.$router.push('/HomePage')
     }
   })

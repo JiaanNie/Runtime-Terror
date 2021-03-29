@@ -52,7 +52,6 @@ class Image(Resource):
                 prediction = model.predict(im)
                 index =np.argmax(prediction)
                 self.label = class_names[index]
-        print("google vision setting: ", google_vision_setting, self.label)
         if self.label is None:
             self.label = "Unknown"
         new_image = ImageEntry(
@@ -90,9 +89,7 @@ class Image(Resource):
 
 class FetchImageByID(Resource):
     def get(self, image_id):
-        print(image_id)
         img = ImageEntry.query.filter_by(id=image_id).first()
-        print(img.image_path)
         data = open(img.image_path, "rb").read()
         bytes = bytearray(data)
         return Response(bytes, mimetype=img.mime_type)
@@ -109,14 +106,20 @@ class FetchLabel(Resource):
 
 class SorteImage(Resource):
     def get(self):
+        user_uuid = request.headers["user"]
         base_path = config.SortedImagesBasePath()
         access_right = 0o755
         sorted_imgs = defaultdict(list)
-        imgs = ImageEntry.query.all()
+        imgs = ImageEntry.query.filter_by(user_id=user_uuid).all()
+        user_path =  base_path + "\\" + user_uuid
+        try:
+            os.mkdir(user_path, access_right)
+        except:
+            print("User folder already exist")
         for img in imgs:
             sorted_imgs[img.label].append(img)
         for label in sorted_imgs.keys():
-            target_path  = base_path+"\\"+label
+            target_path = user_path + "\\" + label
             try:
                 os.mkdir(target_path, access_right)
             except:
@@ -129,10 +132,9 @@ class SorteImage(Resource):
                 except:
                     print(file.image_path, file.id, "image no longer exist")
         file_paths = []
-        for root, dirs, files in os.walk(base_path):
+        for root, dirs, files in os.walk(user_path):
             for file in files:
                 path =  os.path.join(root, file)
-                print(path)
                 file_paths.append(path)
         with ZipFile('result.zip','w') as zip:
             for file in file_paths:
@@ -193,7 +195,6 @@ class FetchPlaceDetails(Resource):
         place_detail = 'https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input={}&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key={}'
         res = python_requests.get(place_detail.format(input, google_api_key))
         res = res.json()['candidates'][0]
-        print(res['name'])
         photo_reference = res['photos'][0]['photo_reference']
         location = res['geometry']['location']
         response = {
@@ -207,10 +208,12 @@ class Login(Resource):
     def post(self):
         email = request.json['email']
         password = request.json['password']
-        print(email, password)
         q = User.query.filter((User.email==email) & (User.password==password)).first()
+        res = {}
         if q is not None:
-            return q.uuid
+            res["uuid"] = q.uuid
+            res["email"] = q.email
+            return res
         else:
             return 404, "invaild account"
 

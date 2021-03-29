@@ -83,7 +83,7 @@ export default {
       setTimeout(() => { vm.isQuery = true }, 2000)
     },
     getZip () {
-      axios.get(URL + 'sort', { responseType: 'blob' }).then(function (res) {
+      axios.get(URL + 'sort', { headers: { user: this.getUserUUID }, responseType: 'blob' }).then(function (res) {
         saveAs(res.data)
       })
     },

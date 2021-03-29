@@ -7,3 +7,6 @@ export function updateLoginState (state, loginState) {
 export function updateGoogleVersionModelStatus (state, setting) {
   state.googleVersionModle = setting
 }
+export function updateUserEmail (state, email) {
+  state.userEmail = email
+}
