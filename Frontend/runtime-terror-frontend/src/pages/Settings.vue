@@ -3,7 +3,7 @@
     <div class="q-pa-md" style="max-width: 100%">
       <q-list bordered padding>
         <q-item-label header>Account Info</q-item-label>
-        <q-item tag="lable">
+        <q-item>
           <q-item-section>
             <q-item-label>User Email</q-item-label>
           </q-item-section>
@@ -11,7 +11,7 @@
             <q-input :placeholder="this.getUserEmail" readonly/>
           </q-item-section>
         </q-item>
-        <q-item tag="lable" v-ripple>
+        <q-item v-ripple>
           <q-item-section>
             <q-item-label>Enable Google Vision</q-item-label>
           </q-item-section>
@@ -19,7 +19,7 @@
             <q-toggle color="blue" v-model="getGoogleVersionModle" val="battery" @input="setGoogleVersionModel(!getGoogleVersionModle)"/>
           </q-item-section>
         </q-item>
-        <q-item tag="label" v-ripple>
+        <q-item v-ripple>
           <q-item-section>
             <q-item-label>Log Out</q-item-label>
           </q-item-section>
@@ -29,12 +29,20 @@
         </q-item>
         <q-separator spaced />
         <q-item-label header>Application Settings</q-item-label>
-        <q-item tag="label" v-ripple>
+        <q-item v-ripple>
           <q-item-section>
             <q-item-label>Dark mode</q-item-label>
           </q-item-section>
           <q-item-section side >
             <q-toggle color="blue" v-model="notif1" val="battery" @input="toggle"/>
+          </q-item-section>
+        </q-item>
+        <q-item v-ripple>
+          <q-item-section>
+            <q-item-label>Export Sorted Images</q-item-label>
+          </q-item-section>
+          <q-item-section side >
+            <q-icon name="fas fa-download"  @click="exportImages"/>
           </q-item-section>
         </q-item>
         <q-separator spaced />
@@ -74,6 +82,8 @@
 <script>
 import { colors } from 'quasar'
 import { mapGetters, mapActions } from 'vuex'
+import axios from 'axios'
+import { saveAs } from 'file-saver'
 export default {
   name: 'Settings',
   data () {
@@ -94,12 +104,18 @@ export default {
     logout () {
       this.$router.push('/')
     },
-    ...mapActions({ setGoogleVersionModel: 'user/setGoogleVersionModel' })
+    ...mapActions({ setGoogleVersionModel: 'user/setGoogleVersionModel' }),
+    exportImages () {
+      axios.get(this.URL + 'sort', { headers: { user: this.getUserUUID }, responseType: 'blob' }).then(function (res) {
+        saveAs(res.data)
+      })
+    }
   },
   computed: {
     ...mapGetters({ getGoogleVersionModle: 'user/getGoogleVersionModle' }),
     ...mapGetters({ getUserUUID: 'user/getUserUUID' }),
-    ...mapGetters({ getUserEmail: 'user/getUserEmail' })
+    ...mapGetters({ getUserEmail: 'user/getUserEmail' }),
+    ...mapGetters({ URL: 'env/getHostURL' })
   }
 }
 </script>

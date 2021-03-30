@@ -22,8 +22,8 @@
 
 <script>
 import axios from 'axios'
-const URL = 'http://localhost:5000/'
 import secret from 'src/keys'
+import { mapGetters } from 'vuex'
 const key = secret.google_place
 const GOOGLEPhotoBASE = 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference='
 const GOOGLEKEY = `&key=${key}`
@@ -43,13 +43,16 @@ export default {
   methods: {
     fetchPlaceDetails () {
       var vm = this
-      axios.get(URL + 'places').then(function (res) {
+      axios.get(this.URL + 'places').then(function (res) {
         vm.photoReference = GOOGLEPhotoBASE + res.data.photo_reference + GOOGLEKEY
         vm.locationName = res.data.name
         vm.long = res.data.location.lng
         vm.lat = res.data.location.lat
       })
     }
+  },
+  computed: {
+    ...mapGetters({ URL: 'env/getHostURL' })
   }
 }
 </script>

@@ -12,7 +12,6 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import axios from 'axios'
-const URL = 'http://localhost:5000/'
 export default {
   name: 'Favourites',
   data () {
@@ -27,13 +26,14 @@ export default {
     ...mapActions({ fetchFavoriteImagesURL: 'imageURLs/fetchFavoriteImagesURL' }),
     setFavorite (imageDetails) {
       console.log(imageDetails)
-      axios.put(URL + '/favorite/' + imageDetails.id).then((res) => {
+      axios.put(this.URL + '/favorite/' + imageDetails.id).then((res) => {
         this.fetchFavoriteImagesURL()
       })
     }
   },
   computed: {
-    ...mapGetters({ getFavoriteImagesURL: 'imageURLs/getFavoriteImagesURL' })
+    ...mapGetters({ getFavoriteImagesURL: 'imageURLs/getFavoriteImagesURL' }),
+    ...mapGetters({ URL: 'env/getHostURL' })
   }
 }
 </script>

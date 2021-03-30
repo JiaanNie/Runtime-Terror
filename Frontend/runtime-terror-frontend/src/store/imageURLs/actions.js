@@ -1,14 +1,13 @@
 import axios from 'axios'
-const URL = 'http://localhost:5000/'
 var headers = {
-  user: 'abc wilson test'
+  user: ''
 }
 export function fetchAllImagesURL (state) {
   var urls = []
   headers.user = state.rootGetters['user/getUserUUID']
-  axios.get(URL + 'image', { headers }).then(function (res) {
+  axios.get(state.rootGetters['env/getHostURL'] + 'image', { headers }).then(function (res) {
     for (var i in res.data) {
-      var targetURL = URL + 'image/' + res.data[i].id
+      var targetURL = state.rootGetters['env/getHostURL'] + 'image/' + res.data[i].id
       var urlDetails = {
         id: res.data[i].id,
         url: targetURL,
@@ -23,9 +22,9 @@ export function fetchAllImagesURL (state) {
 export function fetchFavoriteImagesURL (state) {
   var urls = []
   headers.user = state.rootGetters['user/getUserUUID']
-  axios.get(URL + 'favorite', { headers }).then(function (res) {
+  axios.get(state.rootGetters['env/getHostURL'] + 'favorite', { headers }).then(function (res) {
     for (var i in res.data) {
-      var targetURL = URL + 'image/' + res.data[i].id
+      var targetURL = state.rootGetters['env/getHostURL'] + 'image/' + res.data[i].id
       var urlDetails = {
         id: res.data[i].id,
         url: targetURL,
@@ -43,9 +42,9 @@ export function filterImagesByLabel (state, label) {
   if (label === 'all') {
     state.dispatch('fetchAllImagesURL')
   } else {
-    axios.get(URL + 'filter', { headers: headers, params: { filter_by: label } }).then((res) => {
+    axios.get(state.rootGetters['env/getHostURL'] + 'filter', { headers: headers, params: { filter_by: label } }).then((res) => {
       for (var i in res.data) {
-        var targetURL = URL + 'image/' + res.data[i].id
+        var targetURL = state.rootGetters['env/getHostURL'] + 'image/' + res.data[i].id
         var urlDetails = {
           id: res.data[i].id,
           url: targetURL,
@@ -61,9 +60,9 @@ export function filterImagesByLabel (state, label) {
 export function searchImages (state, inputText) {
   var urls = []
   headers.user = state.rootGetters['user/getUserUUID']
-  axios.post(URL + 'search', { text: inputText }).then((res) => {
+  axios.post(state.rootGetters['env/getHostURL'] + 'search', { text: inputText }).then((res) => {
     for (var i in res.data) {
-      var targetURL = URL + 'image/' + res.data[i]
+      var targetURL = state.rootGetters['env/getHostURL'] + 'image/' + res.data[i]
       urls.push(targetURL)
     }
     console.log(urls)
@@ -77,7 +76,7 @@ export function fetchAllLabels (state) {
   if (headers.user === '') {
     this.$router.push('/')
   } else {
-    axios.get(URL + 'labels', { headers }).then((res) => {
+    axios.get(state.rootGetters['env/getHostURL'] + 'labels', { headers }).then((res) => {
       labels.push('all')
       for (var index in res.data) {
         labels.push(res.data[index])

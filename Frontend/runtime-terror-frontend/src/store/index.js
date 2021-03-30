@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 // import example from './module-example'
 import imageURLs from './imageURLs'
 import user from './user'
+import env from './env'
 Vue.use(Vuex)
 
 /*
@@ -20,7 +21,8 @@ export default function (/* { ssrContext } */) {
     modules: {
       // example
       imageURLs,
-      user
+      user,
+      env
     },
 
     // enable strict mode (adds overhead!)

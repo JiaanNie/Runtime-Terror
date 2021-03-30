@@ -34,8 +34,6 @@
 import axios from 'axios'
 import { saveAs } from 'file-saver'
 import { mapGetters, mapActions } from 'vuex'
-// const URL = 'http://ec2-3-97-34-208.ca-central-1.compute.amazonaws.com:5000/'
-const URL = 'http://localhost:5000/'
 export default {
   name: 'PageIndex',
   data () {
@@ -70,7 +68,7 @@ export default {
         }
         fd.append('img', filesImages[i])
         fd.append('label', 'Unknown')
-        axios.post(URL + 'image', fd, { headers: headers, params: { GoogleVisionModel: this.getGoogleVersionModle } }).then(function (res) {
+        axios.post(this.URL + 'image', fd, { headers: headers, params: { GoogleVisionModel: this.getGoogleVersionModle } }).then(function (res) {
           vm.fetchAllImagesURL()
           vm.fetchAllLabels()
         })
@@ -83,7 +81,7 @@ export default {
       setTimeout(() => { vm.isQuery = true }, 2000)
     },
     getZip () {
-      axios.get(URL + 'sort', { headers: { user: this.getUserUUID }, responseType: 'blob' }).then(function (res) {
+      axios.get(this.URL + 'sort', { headers: { user: this.getUserUUID }, responseType: 'blob' }).then(function (res) {
         saveAs(res.data)
       })
     },
@@ -91,7 +89,7 @@ export default {
     ...mapActions({ fetchFavoriteImagesURL: 'imageURLs/fetchFavoriteImagesURL' }),
     ...mapActions({ fetchAllLabels: 'imageURLs/fetchAllLabels' }),
     setFavorite (imageDetails) {
-      axios.put(URL + '/favorite/' + imageDetails.id).then((res) => {
+      axios.put(this.URL + '/favorite/' + imageDetails.id).then((res) => {
         this.fetchAllImagesURL()
       })
     }
@@ -100,7 +98,8 @@ export default {
     ...mapGetters({ getImagesURL: 'imageURLs/getImagesURL' }),
     ...mapGetters({ getFavoriteImagesURL: 'imageURLs/getFavoriteImagesURL' }),
     ...mapGetters({ getUserUUID: 'user/getUserUUID' }),
-    ...mapGetters({ getGoogleVersionModle: 'user/getGoogleVersionModle' })
+    ...mapGetters({ getGoogleVersionModle: 'user/getGoogleVersionModle' }),
+    ...mapGetters({ URL: 'env/getHostURL' })
   }
 }
 </script>
