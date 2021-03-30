@@ -160,8 +160,12 @@ class Search(Resource):
         result = ImageEntry.query.filter_by(user_id=user_uuid).filter(ImageEntry.file_name.like("%"+ text + "%")).all()
         result += ImageEntry.query.filter_by(user_id=user_uuid).filter(ImageEntry.mime_type.like("%"+ text + "%")).all()
         result += ImageEntry.query.filter_by(user_id=user_uuid).filter(ImageEntry.label.like("%"+ text + "%")).all()
+        result = list(dict.fromkeys(result))
         for img in result:
-            ids.append(img.id)
+            details = {}
+            details["id"] = img.id
+            details["favorite"] = img.favorite
+            ids.append(details)
         return jsonify(ids)
 
 class FilterLabel(Resource):

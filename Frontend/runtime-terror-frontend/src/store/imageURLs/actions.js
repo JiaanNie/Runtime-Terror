@@ -62,9 +62,9 @@ export function searchImages (state, inputText) {
   headers.user = state.rootGetters['user/getUserUUID']
   axios.post(state.rootGetters['env/getHostURL'] + 'search', { text: inputText }, { headers: headers }).then((res) => {
     for (var i in res.data) {
-      var targetURL = state.rootGetters['env/getHostURL'] + 'image/' + res.data[i]
+      var targetURL = state.rootGetters['env/getHostURL'] + 'image/' + res.data[i].id
       var urlDetails = {
-        id: res.data[i],
+        id: res.data[i].id,
         url: targetURL,
         favorite: res.data[i].favorite
       }
