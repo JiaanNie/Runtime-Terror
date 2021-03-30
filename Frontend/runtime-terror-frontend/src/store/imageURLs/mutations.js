@@ -9,3 +9,6 @@ export function updateFavoriteIDsArray (state, newArray) {
 export function updateLabelsArray (state, newArray) {
   state.labels = newArray
 }
+export function updateSortedImages (state, sortedImages) {
+  state.sortedImages = sortedImages
+}

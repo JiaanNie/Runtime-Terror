@@ -60,10 +60,15 @@ export function filterImagesByLabel (state, label) {
 export function searchImages (state, inputText) {
   var urls = []
   headers.user = state.rootGetters['user/getUserUUID']
-  axios.post(state.rootGetters['env/getHostURL'] + 'search', { text: inputText }).then((res) => {
+  axios.post(state.rootGetters['env/getHostURL'] + 'search', { text: inputText }, { headers: headers }).then((res) => {
     for (var i in res.data) {
       var targetURL = state.rootGetters['env/getHostURL'] + 'image/' + res.data[i]
-      urls.push(targetURL)
+      var urlDetails = {
+        id: res.data[i],
+        url: targetURL,
+        favorite: res.data[i].favorite
+      }
+      urls.push(urlDetails)
     }
     console.log(urls)
     state.commit('updateIDsArray', urls)
@@ -84,4 +89,11 @@ export function fetchAllLabels (state) {
       state.commit('updateLabelsArray', labels)
     })
   }
+}
+
+export function fetchSortedImages (state) {
+  headers.user = state.rootGetters['user/getUserUUID']
+  axios.get(state.rootGetters['env/getHostURL'] + 'sort_view', { headers }).then((res) => {
+    state.commit('updateSortedImages', res.data)
+  })
 }

@@ -141,6 +141,17 @@ class SorteImage(Resource):
                 zip.write(file)
         return send_file('result.zip', attachment_filename='capsule.zip', as_attachment=True, cache_timeout=0)
 
+class SortedView(Resource):
+    def get(self):
+        user_uuid = request.headers["user"]
+        base_path = config.SortedImagesBasePath()
+        sorted_imgs = defaultdict(list)
+        imgs = ImageEntry.query.filter_by(user_id=user_uuid).all()
+        user_path =  base_path + "\\" + user_uuid
+        for img in imgs:
+            sorted_imgs[img.label].append(img.id)
+        return jsonify(sorted_imgs)
+
 class Search(Resource):
     def post(self):
         ids = []

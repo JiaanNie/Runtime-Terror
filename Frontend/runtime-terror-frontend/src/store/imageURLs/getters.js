@@ -8,3 +8,6 @@ export function getFavoriteImagesURL (state) {
 export function getLabels (state) {
   return state.labels
 }
+export function getSortedImages (state) {
+  return state.sortedImages
+}

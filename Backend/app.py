@@ -16,6 +16,7 @@ with app.app_context():
 api.add_resource(Image, "/image")
 api.add_resource(FetchImageByID, "/image/<image_id>")
 api.add_resource(SorteImage, "/sort")
+api.add_resource(SortedView, "/sort_view")
 api.add_resource(FetchLabel, "/labels")
 api.add_resource(Search, "/search")
 api.add_resource(FilterLabel, "/filter")

@@ -7,6 +7,13 @@ const routes = [
       { path: '', component: () => import('pages/UserAuth.vue') }
     ]
   },
+  {
+    path: '/SortedView',
+    component: () => import('layouts/IndexLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/SortedView.vue') }
+    ]
+  },
 
   {
     path: '/HomePage',

@@ -2,6 +2,7 @@ export default function () {
   return {
     imageURLArray: [],
     favoriteURLArray: [],
-    labels: []
+    labels: [],
+    sortedImages: {}
   }
 }

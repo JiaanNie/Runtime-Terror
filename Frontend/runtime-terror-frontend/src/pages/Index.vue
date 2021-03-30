@@ -10,9 +10,13 @@
         </q-img>
     </div>
     <q-page-sticky position="bottom-right" :offset="[18, 18]">
-        <q-btn v-if="isDoneUploading" fab icon="done" color="accent" class="shadow-7" @click= "sortImages" />
+        <q-btn v-if="isNormalView" fab icon="fas fa-sort" color="accent" class="shadow-7" @click= "sortView">
+          <q-tooltip content-class="bg-indigo" :offset="[10, 10]">
+            Sorted View
+          </q-tooltip>
+        </q-btn>
     </q-page-sticky>
-    <q-dialog v-model="ready">
+    <!-- <q-dialog v-model="ready">
       <q-card style="max-width: 1500px;width:1400px;height:160px">
         <q-card-section>
           <div class="text-h6">Sorting Images</div>
@@ -26,7 +30,7 @@
           <q-btn flat label="Donwload Zip" color="primary" v-close-popup @click="getZip"/>
         </q-card-actions>
       </q-card>
-    </q-dialog>
+    </q-dialog> -->
   </q-page>
 </template>
 
@@ -45,7 +49,8 @@ export default {
       ready: false,
       progress: 0,
       isQuery: false,
-      isDone: 1
+      isDone: 1,
+      isNormalView: true
 
     }
   },
@@ -88,10 +93,17 @@ export default {
     ...mapActions({ fetchAllImagesURL: 'imageURLs/fetchAllImagesURL' }),
     ...mapActions({ fetchFavoriteImagesURL: 'imageURLs/fetchFavoriteImagesURL' }),
     ...mapActions({ fetchAllLabels: 'imageURLs/fetchAllLabels' }),
+    ...mapActions({ fetchSortedImages: 'imageURLs/fetchSortedImages' }),
     setFavorite (imageDetails) {
       axios.put(this.URL + '/favorite/' + imageDetails.id).then((res) => {
         this.fetchAllImagesURL()
       })
+    },
+    sortView () {
+      this.isNormalView = false
+      this.fetchSortedImages()
+      this.$router.push('/SortedView')
+      console.log('sort view')
     }
   },
   computed: {
