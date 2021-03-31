@@ -2,7 +2,7 @@
 const routes = [
   {
     path: '/',
-    component: () => import('layouts/DefaultViewtLayout.vue'),
+    component: () => import('layouts/LogoutViewtLayout.vue'),
     children: [
       { path: '', component: () => import('pages/UserAuth.vue') }
     ]
