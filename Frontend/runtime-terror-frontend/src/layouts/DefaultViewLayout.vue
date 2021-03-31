@@ -4,7 +4,8 @@
             <q-toolbar>
               <q-btn flat round dense icon="menu" class="q-mr-sm" />
 
-              <q-toolbar-title>Photo Organizer</q-toolbar-title>
+              <q-toolbar-title>Photo Orls
+                ganizer</q-toolbar-title>
 
               <q-btn flat round dense icon="whatshot" />
             </q-toolbar>
