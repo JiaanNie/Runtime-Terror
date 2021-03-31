@@ -16,7 +16,7 @@
             <q-item-label>Enable Google Vision</q-item-label>
           </q-item-section>
           <q-item-section side >
-            <q-toggle color="blue" :value="getGoogleVersionModel" @input="setGoogleVersionModel(!getGoogleVersionModel)"/>
+            <q-toggle color="blue" :value="getGoogleVisionModel" @input="setGoogleVisionModel(!getGoogleVisionModel)"/>
           </q-item-section>
         </q-item>
         <q-item v-ripple>
