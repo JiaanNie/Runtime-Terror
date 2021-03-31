@@ -1,7 +1,6 @@
 import axios from 'axios'
-const URL = 'http://localhost:5000/'
 export function login (state, credential) {
-  axios.post(URL + 'login', { email: credential.email, password: credential.password }).then((res) => {
+  axios.post(state.rootGetters['env/getHostURL'] + 'login', { email: credential.email, password: credential.password }).then((res) => {
     if (res.data === 404) {
       console.log('invaild credential')
     } else {
@@ -20,7 +19,8 @@ export function logout (state) {
 }
 
 export function signUp (state, credential) {
-  axios.post(URL + 'signup', { email: credential.email, password: credential.password }).then((res) => {
+  console.log(state.rootGetters['env/getHostURL'] + 'signup')
+  axios.post(state.rootGetters['env/getHostURL'] + 'signup', { email: credential.email, password: credential.password }).then((res) => {
     console.log(res)
   })
 }
