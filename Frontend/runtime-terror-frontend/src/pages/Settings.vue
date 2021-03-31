@@ -16,7 +16,7 @@
             <q-item-label>Enable Google Vision</q-item-label>
           </q-item-section>
           <q-item-section side >
-            <q-toggle color="blue" v-model="getGoogleVersionModle" val="battery" @input="setGoogleVersionModel(!getGoogleVersionModle)"/>
+            <q-toggle color="blue" :value="getGoogleVersionModel" @input="setGoogleVersionModel(!getGoogleVersionModel)"/>
           </q-item-section>
         </q-item>
         <q-item v-ripple>
@@ -88,8 +88,7 @@ export default {
   name: 'Settings',
   data () {
     return {
-      notif1: true,
-      notif2: true
+      notif1: true
     }
   },
   methods: {
@@ -112,7 +111,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({ getGoogleVersionModle: 'user/getGoogleVersionModle' }),
+    ...mapGetters({ getGoogleVersionModel: 'user/getGoogleVersionModel' }),
     ...mapGetters({ getUserUUID: 'user/getUserUUID' }),
     ...mapGetters({ getUserEmail: 'user/getUserEmail' }),
     ...mapGetters({ URL: 'env/getHostURL' })
