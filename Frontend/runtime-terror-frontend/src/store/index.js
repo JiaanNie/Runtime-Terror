@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 
 // import example from './module-example'
 import imageURLs from './imageURLs'
-import user from './user'
+import user from './userInfo'
 import env from './env'
 Vue.use(Vuex)
 
