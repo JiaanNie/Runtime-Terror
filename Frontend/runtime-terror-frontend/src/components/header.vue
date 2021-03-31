@@ -2,7 +2,7 @@
   <q-header elevated
   class="bg-primary text-white shadow-2">
     <q-toolbar>
-      <q-toolbar-title>
+      <q-toolbar-title @click="homePage()">
         Albums
       </q-toolbar-title>
       <q-btn v-if="!isReady" dense flat>
@@ -49,7 +49,10 @@ export default {
   methods: {
     ...mapActions({ filterImagesByLabel: 'imageURLs/filterImagesByLabel' }),
     ...mapActions({ searchImages: 'imageURLs/searchImages' }),
-    ...mapActions({ fetchAllLabels: 'imageURLs/fetchAllLabels' })
+    ...mapActions({ fetchAllLabels: 'imageURLs/fetchAllLabels' }),
+    homePage () {
+      this.$router.push('/HomePage')
+    }
   },
   computed: {
     ...mapGetters({ getImagesURL: 'imageURLs/getImagesURL' }),
