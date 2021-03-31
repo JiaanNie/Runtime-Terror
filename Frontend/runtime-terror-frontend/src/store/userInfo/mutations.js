@@ -4,7 +4,7 @@ export function updateUserUUID (state, userUUID) {
 export function updateLoginState (state, loginState) {
   state.isUserLoginn = loginState
 }
-export function updateGoogleVersionModelStatus (state, setting) {
+export function updateGoogleVisionModelStatus (state, setting) {
   state.googleVersionModel = setting
 }
 export function updateUserEmail (state, email) {

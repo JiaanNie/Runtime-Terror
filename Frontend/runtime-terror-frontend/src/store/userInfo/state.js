@@ -2,7 +2,7 @@ export default function () {
   return {
     userUUID: '',
     isUserLoginn: false,
-    googleVersionModel: false,
+    googleVisionModel: false,
     userEmail: ''
   }
 }

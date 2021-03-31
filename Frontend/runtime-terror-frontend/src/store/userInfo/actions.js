@@ -25,6 +25,6 @@ export function signUp (state, credential) {
   })
 }
 
-export function setGoogleVersionModel (state, setting) {
-  state.commit('updateGoogleVersionModelStatus', setting)
+export function setGoogleVisionModel (state, setting) {
+  state.commit('updateGoogleVisionModelStatus', setting)
 }
