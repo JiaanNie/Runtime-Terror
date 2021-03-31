@@ -204,9 +204,14 @@ class FetchFavoriteImages(Resource):
 class FetchPlaceDetails(Resource):
     def get(self):
         list_of_name = ["Eiffel Tower", "Great Wall of China", "Leaning Tower of Pisa", "Pyramid of Giza", "Sydney Opera House in Australia", "Statue of Liberty in the USA", "Taj Mahal in India"]
-        index = random.randint(0,6)
+        for img in imgs:
+            if img.label != "Unknown" and img.label not in list_of_name:
+                list_of_name.append(img.label)
+        print(list_of_name)
+        index = random.randint(0,len(list_of_name) - 1)
         google_api_key = config.GetGooglePlaceAPIKey()
         input = list_of_name[index]
+        print("input is:", input )
         place_detail = 'https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input={}&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key={}'
         res = python_requests.get(place_detail.format(input, google_api_key))
         res = res.json()['candidates'][0]
