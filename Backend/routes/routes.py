@@ -30,6 +30,7 @@ class Image(Resource):
     def post(self):
         user_uuid = request.headers["user"]
         param = request.args.to_dict()
+        print(param)
         google_vision_setting = param["GoogleVisionModel"]
         uploaded_image = request.files['img']
         class_names = data["name"].values.tolist()
