@@ -204,6 +204,7 @@ class FetchFavoriteImages(Resource):
 class FetchPlaceDetails(Resource):
     def get(self):
         list_of_name = ["Eiffel Tower", "Great Wall of China", "Leaning Tower of Pisa", "Pyramid of Giza", "Sydney Opera House in Australia", "Statue of Liberty in the USA", "Taj Mahal in India"]
+        imgs = ImageEntry.query.all()
         for img in imgs:
             if img.label != "Unknown" and img.label not in list_of_name:
                 list_of_name.append(img.label)
