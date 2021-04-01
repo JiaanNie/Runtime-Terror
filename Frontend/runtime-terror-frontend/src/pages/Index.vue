@@ -4,7 +4,7 @@
         <q-file standout bottom-slots ref="file" color="grey" style="color: grey-4; height: 140px; max-width: 150px; color:transparent; " v-model="filesImages" multiple accept=".jpg, image/*" @input="uploadImages(filesImages)" >
             <q-icon name="add_a_photo" class="absolute-center" style="height: 140px; font-size: 2em; color: #BCAAA4"/>
         </q-file>
-        <q-img contain v-for= "item in getImagesURL" :key=item.id :src=item.url style="height: 140px; max-width: 150px" class="shadow-7">
+        <q-img contain v-for= "item in getImagesURL" :key=item.id :src=item.url style="height: 140px; max-width: 150px" class="shadow-7" @click="showImage(item.url)">
             <q-icon v-if="!item.favorite" name="favorite_border" clickable @click="setFavorite(item)" class="absolute-bottom-right" style="font-size: 3.5em;"/>
             <q-icon v-if="item.favorite" clickable @click="setFavorite(item)" name="favorite" class="absolute-bottom-right" style="font-size: 3.5em; color: red"/>
         </q-img>
@@ -16,21 +16,11 @@
           </q-tooltip>
         </q-btn>
     </q-page-sticky>
-    <!-- <q-dialog v-model="ready">
-      <q-card style="max-width: 1500px;width:1400px;height:160px">
-        <q-card-section>
-          <div class="text-h6">Sorting Images</div>
-        </q-card-section>
-        <q-card-section class="q-pt-none">
-          <q-linear-progress query class="q-mt-md" v-if="!isQuery" />
-          <q-linear-progress class="q-mt-md" :value="isDone" v-if="isQuery"/>
-        </q-card-section>
-
-        <q-card-actions align="right">
-          <q-btn flat label="Donwload Zip" color="primary" v-close-popup @click="getZip"/>
-        </q-card-actions>
+    <q-dialog v-model="isFullSize">
+      <q-card class="fixed-center" style="width:100%; height:60%">
+        <q-img class="fixed-center" :src="selectedURL"></q-img>
       </q-card>
-    </q-dialog> -->
+    </q-dialog>
   </q-page>
 </template>
 
@@ -50,7 +40,9 @@ export default {
       progress: 0,
       isQuery: false,
       isDone: 1,
-      isNormalView: true
+      isNormalView: true,
+      isFullSize: false,
+      selectedURL: ''
 
     }
   },
@@ -80,6 +72,10 @@ export default {
         })
       }
       vm.isDoneUploading = true
+    },
+    showImage (url) {
+      this.isFullSize = true
+      this.selectedURL = url
     },
     sortImages () {
       var vm = this
