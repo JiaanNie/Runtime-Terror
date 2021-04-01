@@ -11,14 +11,14 @@
             <q-input :placeholder="this.getUserEmail" readonly/>
           </q-item-section>
         </q-item>
-        <q-item v-ripple>
+        <!-- <q-item v-ripple>
           <q-item-section>
             <q-item-label>Enable Google Vision</q-item-label>
           </q-item-section>
           <q-item-section side >
-            <q-toggle color="blue" :value="getGoogleVisionModel" @input="setGoogleVisionModel(!getGoogleVisionModel)"/>
+            <q-toggle color="blue" v-model="getGoogleVisionModel" @input="setGoogleVisionModel(!getGoogleVisionModel)"/>
           </q-item-section>
-        </q-item>
+        </q-item> -->
         <q-item v-ripple>
           <q-item-section>
             <q-item-label>Log Out</q-item-label>
@@ -34,7 +34,7 @@
             <q-item-label>Dark mode</q-item-label>
           </q-item-section>
           <q-item-section side >
-            <q-toggle color="blue" v-model="notif1" val="battery" @input="toggle"/>
+            <q-toggle color="blue" v-model="this.$q.dark.isActive" val="battery" @input="toggle"/>
           </q-item-section>
         </q-item>
         <q-item v-ripple>
@@ -50,9 +50,8 @@
           <q-expansion-item expand-separator label="About Album Organizer">
             <q-card>
               <q-card-section>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti
-                commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste
-                eveniet doloribus ullam aliquid.
+                In modern society, travelers have a lot of photos that they have taken over the years on their vacations. Having so many fond memories compounding in their photo albums gets overwhelming over time.
+                Where was this photo taken? Why was this structure so important at the time? what can I do to organize my collections? We would like to create an product that is cross platforms allow users feed their images and automatically help them tag them and organize it into different folders
               </q-card-section>
             </q-card>
           </q-expansion-item>

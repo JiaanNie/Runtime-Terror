@@ -14,7 +14,7 @@
     <q-page-sticky position="bottom-right" :offset="[18, 18]">
         <q-btn v-if="!isNormalView" fab icon="fas fa-th" color="accent" class="shadow-7" @click= "normalView">
           <q-tooltip content-class="bg-indigo" :offset="[10, 10]">
-            Nomral View
+            Normal View
           </q-tooltip>
         </q-btn>
     </q-page-sticky>
